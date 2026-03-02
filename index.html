@@ -114,9 +114,40 @@ body{font-family:'Source Sans 3',sans-serif;background:var(--bg);color:var(--tex
 .sa-model .model-text{margin-top:0.5rem;padding:0.8rem;background:var(--accent-light);border-radius:8px;font-size:0.9rem;line-height:1.6;}
 .sa-pct{font-family:'JetBrains Mono',monospace;font-size:0.85rem;font-weight:500;}
 @media(max-width:600px){.section-card{padding:1.2rem 1rem;}.container{padding:1.5rem 1rem;}.hero{padding:3rem 1.5rem 2.5rem;}}
+
+/* ─── WCAG 2.1 AA: Visible focus indicators ─── */
+:focus-visible {
+  outline: 3px solid #005fcc !important;
+  outline-offset: 2px !important;
+}
+.tab-btn:focus-visible, .nav-btn:focus-visible {
+  outline: 3px solid #005fcc !important;
+  outline-offset: 2px !important;
+}
+/* ─── Skip link ─── */
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 1rem;
+  background: #005fcc;
+  color: #fff;
+  padding: 0.6rem 1.2rem;
+  border-radius: 0 0 6px 6px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-decoration: none;
+  z-index: 9999;
+  transition: top 0.2s;
+}
+.skip-link:focus {
+  top: 0;
+}
+
 </style>
 </head>
 <body>
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
 
 <div class="hero">
   <h1>Water: The Molecule Behind Everything</h1>
@@ -135,7 +166,7 @@ body{font-family:'Source Sans 3',sans-serif;background:var(--bg);color:var(--tex
      STUDY GUIDE
      ═══════════════════════════════════════════════════════════ -->
 <div class="tab-content active" id="tab-study">
-<div class="container">
+<div class="container" id="main-content" role="main">
 
 <div class="toc">
   <h3>Table of Contents</h3>
