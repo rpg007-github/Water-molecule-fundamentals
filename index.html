@@ -114,9 +114,40 @@ body{font-family:'Source Sans 3',sans-serif;background:var(--bg);color:var(--tex
 .sa-model .model-text{margin-top:0.5rem;padding:0.8rem;background:var(--accent-light);border-radius:8px;font-size:0.9rem;line-height:1.6;}
 .sa-pct{font-family:'JetBrains Mono',monospace;font-size:0.85rem;font-weight:500;}
 @media(max-width:600px){.section-card{padding:1.2rem 1rem;}.container{padding:1.5rem 1rem;}.hero{padding:3rem 1.5rem 2.5rem;}}
+
+/* ─── WCAG 2.1 AA: Visible focus indicators ─── */
+:focus-visible {
+  outline: 3px solid #005fcc !important;
+  outline-offset: 2px !important;
+}
+.tab-btn:focus-visible, .nav-btn:focus-visible {
+  outline: 3px solid #005fcc !important;
+  outline-offset: 2px !important;
+}
+/* ─── Skip link ─── */
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 1rem;
+  background: #005fcc;
+  color: #fff;
+  padding: 0.6rem 1.2rem;
+  border-radius: 0 0 6px 6px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-decoration: none;
+  z-index: 9999;
+  transition: top 0.2s;
+}
+.skip-link:focus {
+  top: 0;
+}
+
 </style>
 </head>
 <body>
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
 
 <div class="hero">
   <h1>Water: The Molecule Behind Everything</h1>
@@ -135,7 +166,7 @@ body{font-family:'Source Sans 3',sans-serif;background:var(--bg);color:var(--tex
      STUDY GUIDE
      ═══════════════════════════════════════════════════════════ -->
 <div class="tab-content active" id="tab-study">
-<div class="container">
+<div class="container" id="main-content" role="main">
 
 <div class="toc">
   <h3>Table of Contents</h3>
@@ -556,7 +587,7 @@ const quizData=[
 {q:"Amphipathic molecules have:",opts:["Only hydrophilic regions","Only hydrophobic regions","Both hydrophilic and hydrophobic regions","No interaction with water"],ans:2,exp:"Amphipathic molecules (like phospholipids) have a polar (hydrophilic) head and nonpolar (hydrophobic) tails.",diff:"medium",cat:"Solvent"},
 {q:"The electron geometry of water is ___, but the molecular geometry is ___.",opts:["Linear; bent","Tetrahedral; bent","Bent; tetrahedral","Trigonal planar; bent"],ans:1,exp:"4 electron groups (2 bonds + 2 lone pairs) = tetrahedral electron geometry. 2 bonded atoms = bent molecular geometry.",diff:"medium",cat:"Structure"},
 {q:"A buffer works by:",opts:["Removing all H⁺ ions","Containing a weak acid that donates H⁺ and its conjugate base that accepts H⁺","Adding strong acid to neutralize base","Diluting the solution"],ans:1,exp:"Buffers contain a weak acid/conjugate base pair. The acid neutralizes added base; the conjugate base neutralizes added acid.",diff:"medium",cat:"Buffers"},
-{q:"The bicarbonate buffer system in blood involves the equilibrium:",opts:["NaCl ⇌ Na⁺ + Cl⁻","CO₂ + H₂O ⇌ H₂CO₃ ⇌ H⁺ + HCO₃⁻","O₂ + H₂O ⇌ H₂O₂","NH₃ + H₂O ⇌ NH₄⁺ + OH⁻"],ans:1,exp:"CO₂ dissolves to form carbonic acid, which dissociates to H⁺ and bicarbonate. This is the primary blood buffer.",diff:"medium",cat:"Buffers"},
+{q:"The bicarbonate buffer system in blood involves the equilibrium:",opts:["NaCl <span aria-hidden="true">⇌</span> Na⁺ + Cl⁻","CO₂ + H₂O <span aria-hidden="true">⇌</span> H₂CO₃ <span aria-hidden="true">⇌</span> H⁺ + HCO₃⁻","O₂ + H₂O <span aria-hidden="true">⇌</span> H₂O₂","NH₃ + H₂O <span aria-hidden="true">⇌</span> NH₄⁺ + OH⁻"],ans:1,exp:"CO₂ dissolves to form carbonic acid, which dissociates to H⁺ and bicarbonate. This is the primary blood buffer.",diff:"medium",cat:"Buffers"},
 {q:"Why does sweating cool the body?",opts:["Sweat is cold when it exits the body","Evaporation of sweat removes the highest-energy molecules, lowering skin temperature","Salt in sweat absorbs heat","Sweat reflects sunlight"],ans:1,exp:"Evaporation selectively removes high-energy molecules. This lowers the average kinetic energy (temperature) of remaining molecules on the skin surface.",diff:"medium",cat:"Thermal"},
 {q:"In the reaction q = mcΔT, if you add 4,180 J to 1 kg of water, the temperature change is:",opts:["0.1°C","1°C","10°C","100°C"],ans:1,exp:"q = mcΔT. 4180 = (1000 g)(4.18)(ΔT). ΔT = 4180/4180 = 1°C.",diff:"medium",cat:"Thermal"},
 {q:"Phospholipid bilayers form spontaneously in water because:",opts:["Covalent bonds force them together","Hydrophobic tails are pushed away from water while hydrophilic heads face water","Gravity pulls them into layers","ATP provides energy for assembly"],ans:1,exp:"The hydrophobic effect drives bilayer formation. Tails cluster to avoid water; heads face the aqueous environment. No energy input needed.",diff:"medium",cat:"Solvent"},
@@ -685,10 +716,10 @@ concepts:[
 {term:"Resists pH changes",syns:["resist","stabiliz","maintain","prevent change","minimize"],weight:2},
 {term:"Weak acid donates H⁺ to neutralize added base",syns:["donate","neutralize base","accept base","HA"],weight:2},
 {term:"Conjugate base accepts H⁺ to neutralize added acid",syns:["accept","absorb","neutralize acid","A-","conjugate"],weight:2},
-{term:"Bicarbonate system: CO₂ + H₂O ⇌ H₂CO₃ ⇌ H⁺ + HCO₃⁻",syns:["bicarbon","CO2","H2CO3","HCO3","carbonic"],weight:3},
+{term:"Bicarbonate system: CO₂ + H₂O <span aria-hidden="true">⇌</span> H₂CO₃ <span aria-hidden="true">⇌</span> H⁺ + HCO₃⁻",syns:["bicarbon","CO2","H2CO3","HCO3","carbonic"],weight:3},
 {term:"Blood pH maintained at 7.35-7.45",syns:["7.35","7.45","blood pH","narrow range"],weight:2}
 ],
-model:"A buffer is a solution containing a weak acid and its conjugate base that resists changes in pH. When acid is added, the conjugate base (A⁻) accepts the extra H⁺. When base is added, the weak acid (HA) donates H⁺ to replace what was neutralized. In human blood, the bicarbonate buffer system is critical: CO₂ + H₂O ⇌ H₂CO₃ ⇌ H⁺ + HCO₃⁻. If blood becomes too acidic, HCO₃⁻ absorbs excess H⁺. If blood becomes too basic, H₂CO₃ releases H⁺. The lungs help by adjusting CO₂ levels (breathe faster to lower CO₂ and raise pH, or slower to raise CO₂ and lower pH). This system maintains blood pH within the critical range of 7.35 to 7.45."
+model:"A buffer is a solution containing a weak acid and its conjugate base that resists changes in pH. When acid is added, the conjugate base (A⁻) accepts the extra H⁺. When base is added, the weak acid (HA) donates H⁺ to replace what was neutralized. In human blood, the bicarbonate buffer system is critical: CO₂ + H₂O <span aria-hidden="true">⇌</span> H₂CO₃ <span aria-hidden="true">⇌</span> H⁺ + HCO₃⁻. If blood becomes too acidic, HCO₃⁻ absorbs excess H⁺. If blood becomes too basic, H₂CO₃ releases H⁺. The lungs help by adjusting CO₂ levels (breathe faster to lower CO₂ and raise pH, or slower to raise CO₂ and lower pH). This system maintains blood pH within the critical range of 7.35 to 7.45."
 },
 {q:"Compare and contrast covalent bonds and hydrogen bonds using water as your example. Address where each type occurs, their relative strengths, and their biological significance.",
 concepts:[
@@ -813,7 +844,7 @@ renderQuiz();showCard();renderSA();
 </script>
 
   <div style="max-width: 800px; margin: 40px auto; padding: 20px 30px; background: #fff8e1; border-left: 4px solid #f9a825; border-radius: 8px; font-size: 14px; line-height: 1.6; color: #555;">
-  <div style="font-weight: bold; font-size: 15px; margin-bottom: 10px;">⚠️ Important Notice</div>
+  <div style="font-weight: bold; font-size: 15px; margin-bottom: 10px;"><span aria-hidden="true">⚠️</span> Important Notice</div>
   <p style="margin: 0 0 10px 0;">These study resources are provided free of charge for educational purposes only. They are intended as supplemental study aids and should not be used as a substitute for your course textbooks, lecture materials, or the guidance of your instructors.</p>
   <p style="margin: 0 0 10px 0;">While every effort has been made to ensure accuracy, this content may contain errors, omissions, or information that is out of date. Science is constantly evolving, and material that was accurate at the time of writing may no longer reflect current understanding. Always verify important facts, formulas, and concepts against your official course materials.</p>
   <p style="margin: 0 0 10px 0;">No guarantees are made regarding the completeness, accuracy, or reliability of any information presented on these sites. Use at your own discretion. If you spot an error, we appreciate you letting us know so it can be corrected.</p>
