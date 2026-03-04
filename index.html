@@ -115,16 +115,16 @@ body{font-family:'Source Sans 3',sans-serif;background:var(--bg);color:var(--tex
 .sa-pct{font-family:'JetBrains Mono',monospace;font-size:0.85rem;font-weight:500;}
 @media(max-width:600px){.section-card{padding:1.2rem 1rem;}.container{padding:1.5rem 1rem;}.hero{padding:3rem 1.5rem 2.5rem;}}
 
-/* ─── WCAG 2.1 AA: Visible focus indicators ─── */
+/* ---- WCAG 2.1 AA: Visible focus indicators ---- */
 :focus-visible {
   outline: 3px solid #005fcc !important;
   outline-offset: 2px !important;
 }
-.tab-btn:focus-visible, .nav-btn:focus-visible {
+.nav-tab:focus-visible, .fc-nav button:focus-visible, .fc-filter:focus-visible {
   outline: 3px solid #005fcc !important;
   outline-offset: 2px !important;
 }
-/* ─── Skip link ─── */
+/* ---- Skip link ---- */
 .skip-link {
   position: absolute;
   top: -100px;
@@ -142,33 +142,46 @@ body{font-family:'Source Sans 3',sans-serif;background:var(--bg);color:var(--tex
 .skip-link:focus {
   top: 0;
 }
-
+/* ---- Live region for screen readers ---- */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border: 0;
+}
 </style>
 </head>
 <body>
 <a href="#main-content" class="skip-link">Skip to main content</a>
 
+<!-- Live region for announcing dynamic content changes to screen readers -->
+<div id="live-announce" class="sr-only" aria-live="polite" aria-atomic="true"></div>
 
-<div class="hero">
+<header class="hero">
   <h1>Water: The Molecule Behind Everything</h1>
   <p class="subtitle">Structure, Properties, pH &amp; Why Biology Runs on Water</p>
   <div class="badge">FOCUSED TOPIC MODULE</div>
-</div>
+</header>
 
-<nav class="nav-tabs">
-  <button class="nav-tab active" data-tab="study" onclick="switchTab('study')">Study Guide</button>
-  <button class="nav-tab" data-tab="quiz" onclick="switchTab('quiz')">Quiz</button>
-  <button class="nav-tab" data-tab="flashcards" onclick="switchTab('flashcards')">Flashcards</button>
-  <button class="nav-tab" data-tab="sa" onclick="switchTab('sa')">Short Answer</button>
+<nav class="nav-tabs" aria-label="Module sections">
+  <button class="nav-tab active" data-tab="study" onclick="switchTab('study')" aria-selected="true" role="tab" aria-controls="tab-study">Study Guide</button>
+  <button class="nav-tab" data-tab="quiz" onclick="switchTab('quiz')" aria-selected="false" role="tab" aria-controls="tab-quiz">Quiz</button>
+  <button class="nav-tab" data-tab="flashcards" onclick="switchTab('flashcards')" aria-selected="false" role="tab" aria-controls="tab-flashcards">Flashcards</button>
+  <button class="nav-tab" data-tab="sa" onclick="switchTab('sa')" aria-selected="false" role="tab" aria-controls="tab-sa">Short Answer</button>
 </nav>
 
-<!-- ═══════════════════════════════════════════════════════════
+<!-- ===============================================================
      STUDY GUIDE
-     ═══════════════════════════════════════════════════════════ -->
-<div class="tab-content active" id="tab-study">
+     =============================================================== -->
+<div class="tab-content active" id="tab-study" role="tabpanel" aria-labelledby="tab-study-label">
 <div class="container" id="main-content" role="main">
 
-<div class="toc">
+<nav class="toc" aria-label="Table of contents">
   <h3>Table of Contents</h3>
   <div class="toc-grid">
     <a href="#s1">01 &mdash; Water's Molecular Structure</a>
@@ -183,10 +196,10 @@ body{font-family:'Source Sans 3',sans-serif;background:var(--bg);color:var(--tex
     <a href="#s10">10 &mdash; Water in Living Systems</a>
     <a href="#s11">11 &mdash; Key Numbers Reference</a>
   </div>
-</div>
+</nav>
 
 <!-- SECTION 1 -->
-<div class="section-card" id="s1">
+<section class="section-card" id="s1">
   <h2><span class="sec-num">01</span>Water's Molecular Structure</h2>
   <p>Water is H<sub>2</sub>O: two hydrogen atoms covalently bonded to one oxygen atom. To understand water's shape, you need to understand what is happening with the electrons on oxygen.</p>
 
@@ -210,10 +223,10 @@ body{font-family:'Source Sans 3',sans-serif;background:var(--bg);color:var(--tex
     <div class="warning-label">Common Mistake</div>
     Students often say water's electron geometry is "bent." It is not. The electron geometry is tetrahedral (four groups of electrons around oxygen). The molecular geometry is bent (only two atoms bonded to the central atom). Electron geometry and molecular geometry are different things.
   </div>
-</div>
+</section>
 
 <!-- SECTION 2 -->
-<div class="section-card" id="s2">
+<section class="section-card" id="s2">
   <h2><span class="sec-num">02</span>Polarity &amp; Electronegativity</h2>
   <p>In a covalent bond, two atoms share electrons. But in most bonds, the sharing is not equal. One atom usually pulls the shared electrons closer to itself. <strong>Electronegativity</strong> is a number that describes how strongly an atom attracts shared electrons in a covalent bond. The higher the number, the stronger the pull.</p>
 
@@ -239,10 +252,10 @@ body{font-family:'Source Sans 3',sans-serif;background:var(--bg);color:var(--tex
     <div class="bridge-label">Cross-Disciplinary Bridge</div>
     Electronegativity and polarity are taught in general chemistry when you learn about bonding. In biology, this same concept explains why water is a good solvent, why membranes form, why proteins fold, and why DNA strands pair. Polarity is the single most important concept connecting chemistry to biology. You will never escape electronegativity. It comes back in organic chemistry, biochemistry, and physiology. The Pauling scale values are the same everywhere.
   </div>
-</div>
+</section>
 
 <!-- SECTION 3 -->
-<div class="section-card" id="s3">
+<section class="section-card" id="s3">
   <h2><span class="sec-num">03</span>Hydrogen Bonding</h2>
   <p>Now that you understand polarity (Section 02) and lone pairs (Section 01), you have everything you need to understand hydrogen bonding, which is the single most important intermolecular force in biology.</p>
 
@@ -265,7 +278,8 @@ body{font-family:'Source Sans 3',sans-serif;background:var(--bg);color:var(--tex
   <p>To put hydrogen bonds in perspective, here is how they compare to other types of attractions. The strength values below are approximate averages measured experimentally by determining how much energy it takes to break each type of bond (in kilojoules per mole of bonds broken).</p>
 
   <table class="fact-table">
-    <tr><th>Bond Type</th><th>Typical Strength</th><th>Where It Acts</th><th>Example</th></tr>
+    <caption class="sr-only">Comparison of bond types and their strengths</caption>
+    <tr><th scope="col">Bond Type</th><th scope="col">Typical Strength</th><th scope="col">Where It Acts</th><th scope="col">Example</th></tr>
     <tr><td>Covalent</td><td>Strong (~400 kJ/mol)</td><td>Within a molecule (intramolecular)</td><td>O-H bond inside a water molecule</td></tr>
     <tr><td>Ionic</td><td>Strong in crystals, variable in solution</td><td>Between oppositely charged ions</td><td>NaCl crystal lattice</td></tr>
     <tr><td>Hydrogen bond</td><td>Weak (~20 kJ/mol)</td><td>Between molecules (intermolecular)</td><td>Between two water molecules, via a lone pair</td></tr>
@@ -281,10 +295,10 @@ body{font-family:'Source Sans 3',sans-serif;background:var(--bg);color:var(--tex
     <div class="bridge-label">Cross-Disciplinary Bridge</div>
     Hydrogen bonds show up everywhere in biology, and in every case the mechanism is the same: a &delta;+ hydrogen attracted to a lone pair on an electronegative atom. In DNA, the bases on opposite strands are held together by hydrogen bonds between N-H groups (hydrogen donors) and lone pairs on oxygen or nitrogen atoms (hydrogen acceptors). Adenine pairs with thymine through 2 hydrogen bonds; guanine pairs with cytosine through 3 hydrogen bonds. In proteins, hydrogen bonds between the N-H of one peptide bond and the lone pair on the C=O oxygen of another peptide bond create the alpha helix and beta sheet secondary structures. In plants, hydrogen bonds between water molecules allow water to be pulled through xylem vessels from roots to leaves. The intermolecular force is identical in every case. If you understand it in water, you understand it everywhere.
   </div>
-</div>
+</section>
 
 <!-- SECTION 4 -->
-<div class="section-card" id="s4">
+<section class="section-card" id="s4">
   <h2><span class="sec-num">04</span>Cohesion, Adhesion &amp; Surface Tension</h2>
   <p><strong>Cohesion</strong> is the attraction of water molecules to other water molecules. This is a direct consequence of hydrogen bonding. Because water molecules are constantly forming hydrogen bonds with their neighbors, they tend to stick together.</p>
 
@@ -303,10 +317,10 @@ body{font-family:'Source Sans 3',sans-serif;background:var(--bg);color:var(--tex
     <div class="key-label">Key Point</div>
     A meniscus in a graduated cylinder is caused by adhesion (water climbing the glass walls) and cohesion (the rest of the water being pulled along). You read the volume at the bottom of the meniscus because that is the true level of the bulk water.
   </div>
-</div>
+</section>
 
 <!-- SECTION 5 -->
-<div class="section-card" id="s5">
+<section class="section-card" id="s5">
   <h2><span class="sec-num">05</span>Thermal Properties</h2>
   <p>Water has three thermal properties that are unusually high compared to similar-sized molecules, and all three are explained by hydrogen bonding.</p>
 
@@ -329,10 +343,10 @@ body{font-family:'Source Sans 3',sans-serif;background:var(--bg);color:var(--tex
     <div class="bridge-label">Cross-Disciplinary Bridge</div>
     The heat equation q = mc&Delta;T appears in general chemistry (calorimetry, thermochemistry), physics (thermodynamics), and biology (body temperature regulation, ecology of aquatic environments). The concept is identical. Water's high specific heat is why coastal cities have milder climates than inland cities, why your body temperature stays stable, and why aquatic organisms are buffered against rapid temperature swings.
   </div>
-</div>
+</section>
 
 <!-- SECTION 6 -->
-<div class="section-card" id="s6">
+<section class="section-card" id="s6">
   <h2><span class="sec-num">06</span>Water as a Solvent</h2>
   <p>Water is called the "universal solvent" not because it dissolves everything, but because it dissolves more different substances than any other common liquid. The reason is polarity. Water's partial charges allow it to interact with and pull apart ionic compounds and other polar molecules.</p>
 
@@ -348,10 +362,10 @@ body{font-family:'Source Sans 3',sans-serif;background:var(--bg);color:var(--tex
     <div class="key-label">Key Point</div>
     The entire structure of cell membranes exists because of water. Phospholipids arrange themselves into bilayers specifically to satisfy the thermodynamic preference of hydrophobic tails to avoid water and hydrophilic heads to contact water. No water, no membranes, no cells.
   </div>
-</div>
+</section>
 
 <!-- SECTION 7 -->
-<div class="section-card" id="s7">
+<section class="section-card" id="s7">
   <h2><span class="sec-num">07</span>Ice &amp; Density</h2>
   <p>Most substances are denser as solids than as liquids. Water is the famous exception. Ice is less dense than liquid water, which is why ice floats. The density of liquid water at 4&deg;C is 1.00 g/mL. The density of ice at 0&deg;C is about 0.917 g/mL.</p>
 
@@ -368,10 +382,10 @@ body{font-family:'Source Sans 3',sans-serif;background:var(--bg);color:var(--tex
     <div class="warning-label">Common Mistake</div>
     The question "why does ice float?" is not answered by saying "because it is less dense." That is circular. The real answer is that the hydrogen-bonded crystal lattice of ice has an open structure that occupies more volume per molecule than liquid water. The lattice geometry is the cause; lower density is the result.
   </div>
-</div>
+</section>
 
 <!-- SECTION 8 -->
-<div class="section-card" id="s8">
+<section class="section-card" id="s8">
   <h2><span class="sec-num">08</span>pH, Acids &amp; Bases</h2>
   <p>Pure water undergoes a slight self-ionization: a tiny fraction of water molecules donate a proton to a neighbor, producing H<sub>3</sub>O<sup>+</sup> (hydronium) and OH<sup>&minus;</sup> (hydroxide). The concentrations of these ions in pure water at 25&deg;C are both 1 &times; 10<sup>&minus;7</sup> M.</p>
 
@@ -391,7 +405,8 @@ body{font-family:'Source Sans 3',sans-serif;background:var(--bg);color:var(--tex
 
   <h3>Acids and Bases</h3>
   <table class="fact-table">
-    <tr><th>Definition</th><th>Acid</th><th>Base</th></tr>
+    <caption class="sr-only">Definitions of acids and bases</caption>
+    <tr><th scope="col">Definition</th><th scope="col">Acid</th><th scope="col">Base</th></tr>
     <tr><td>Arrhenius</td><td>Produces H<sup>+</sup> in water</td><td>Produces OH<sup>&minus;</sup> in water</td></tr>
     <tr><td>Br&oslash;nsted-Lowry</td><td>Proton (H<sup>+</sup>) donor</td><td>Proton (H<sup>+</sup>) acceptor</td></tr>
   </table>
@@ -410,10 +425,10 @@ body{font-family:'Source Sans 3',sans-serif;background:var(--bg);color:var(--tex
     <div class="warning-label">Common Mistake</div>
     Lower pH means MORE acidic (more H<sup>+</sup>), not less. The scale runs in the opposite direction of concentration. pH 2 is strongly acidic; pH 12 is strongly basic. Students frequently get this backward.
   </div>
-</div>
+</section>
 
 <!-- SECTION 9 -->
-<div class="section-card" id="s9">
+<section class="section-card" id="s9">
   <h2><span class="sec-num">09</span>Buffers</h2>
   <p>A buffer is a solution that resists changes in pH when small amounts of acid or base are added. Buffers work because they contain both a weak acid (which can neutralize added base by donating H<sup>+</sup>) and its conjugate base (which can neutralize added acid by accepting H<sup>+</sup>).</p>
 
@@ -436,10 +451,10 @@ body{font-family:'Source Sans 3',sans-serif;background:var(--bg);color:var(--tex
     <div class="bridge-label">Cross-Disciplinary Bridge</div>
     Buffers connect general chemistry (equilibrium, weak acid/base chemistry, Henderson-Hasselbalch equation) directly to physiology (blood pH regulation), biochemistry (enzyme function requires specific pH ranges), and clinical medicine (metabolic acidosis/alkalosis, respiratory compensation). The chemistry is identical; only the context changes.
   </div>
-</div>
+</section>
 
 <!-- SECTION 10 -->
-<div class="section-card" id="s10">
+<section class="section-card" id="s10">
   <h2><span class="sec-num">10</span>Water in Living Systems</h2>
 
   <h3>Body Water</h3>
@@ -464,13 +479,14 @@ body{font-family:'Source Sans 3',sans-serif;background:var(--bg);color:var(--tex
     <div class="key-label">Key Point</div>
     Water is not just the background environment for life. It is an active participant in the chemistry of life, serving as a reactant, product, solvent, temperature buffer, and structural element (turgor pressure in plants). Understanding water is understanding the medium in which all biology occurs.
   </div>
-</div>
+</section>
 
 <!-- SECTION 11 -->
-<div class="section-card" id="s11">
+<section class="section-card" id="s11">
   <h2><span class="sec-num">11</span>Key Numbers Reference</h2>
   <table class="fact-table">
-    <tr><th>Value</th><th>Number</th></tr>
+    <caption class="sr-only">Key numerical values for water</caption>
+    <tr><th scope="col">Value</th><th scope="col">Number</th></tr>
     <tr><td>Molecular weight of water</td><td>18.02 g/mol</td></tr>
     <tr><td>Bond angle of water</td><td>104.5&deg;</td></tr>
     <tr><td>Specific heat of water</td><td>4.18 J/g&middot;&deg;C</td></tr>
@@ -489,86 +505,103 @@ body{font-family:'Source Sans 3',sans-serif;background:var(--bg);color:var(--tex
     <tr><td>Human body water content</td><td>~60%</td></tr>
     <tr><td>Normal blood pH</td><td>7.35 to 7.45</td></tr>
   </table>
-</div>
+</section>
 
 </div>
 </div>
 
-<!-- ═══════════════════════════════════════════════════════════
+<!-- ===============================================================
      QUIZ
-     ═══════════════════════════════════════════════════════════ -->
-<div class="tab-content" id="tab-quiz">
+     =============================================================== -->
+<div class="tab-content" id="tab-quiz" role="tabpanel" aria-labelledby="tab-quiz-label">
 <div class="container">
 <div class="quiz-controls">
+  <label for="diff-filter" class="sr-only">Filter by difficulty</label>
   <select id="diff-filter" onchange="filterQuiz()"><option value="all">All Difficulties</option><option value="easy">Easy</option><option value="medium">Medium</option><option value="hard">Hard</option></select>
+  <label for="cat-filter" class="sr-only">Filter by topic</label>
   <select id="cat-filter" onchange="filterQuiz()"><option value="all">All Topics</option></select>
   <button onclick="resetQuiz()">Reset Quiz</button>
 </div>
-<div class="score-bar"><div class="score-fill-wrap"><div class="score-fill" id="score-fill"></div></div><div class="score-text" id="score-text">0 / 0</div></div>
-<div id="quiz-area"></div>
+<div class="score-bar" role="status" aria-label="Quiz score"><div class="score-fill-wrap" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"><div class="score-fill" id="score-fill"></div></div><div class="score-text" id="score-text">0 / 0</div></div>
+<div id="quiz-area" role="list" aria-label="Quiz questions"></div>
 </div>
 </div>
 
-<!-- ═══════════════════════════════════════════════════════════
+<!-- ===============================================================
      FLASHCARDS
-     ═══════════════════════════════════════════════════════════ -->
-<div class="tab-content" id="tab-flashcards">
+     =============================================================== -->
+<div class="tab-content" id="tab-flashcards" role="tabpanel" aria-labelledby="tab-flashcards-label">
 <div class="container">
-<div class="fc-filters" id="fc-filters"></div>
-<div class="fc-counter" id="fc-counter"></div>
-<div class="fc-area" onclick="flipCard()">
+<div class="fc-filters" id="fc-filters" role="toolbar" aria-label="Filter flashcards by topic"></div>
+<div class="fc-counter" id="fc-counter" aria-live="polite"></div>
+<div class="fc-area" onclick="flipCard()" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();flipCard();}" tabindex="0" role="button" aria-label="Flashcard. Press Enter or Space to flip.">
   <div class="fc-inner" id="fc-inner">
-    <div class="fc-face fc-front"><div class="fc-cat" id="fc-cat"></div><div class="fc-q" id="fc-q"></div><div class="fc-hint">Click to flip</div></div>
+    <div class="fc-face fc-front"><div class="fc-cat" id="fc-cat"></div><div class="fc-q" id="fc-q"></div><div class="fc-hint">Click or press Enter to flip</div></div>
     <div class="fc-face fc-back"><div class="fc-a" id="fc-a"></div></div>
   </div>
 </div>
-<div class="fc-nav"><button onclick="prevCard()">&larr; Previous</button><button onclick="nextCard()">Next &rarr;</button></div>
+<div class="fc-nav">
+  <button onclick="prevCard()" aria-label="Previous flashcard">&larr; Previous</button>
+  <button onclick="nextCard()" aria-label="Next flashcard">Next &rarr;</button>
+</div>
 </div>
 </div>
 
-<!-- ═══════════════════════════════════════════════════════════
+<!-- ===============================================================
      SHORT ANSWER
-     ═══════════════════════════════════════════════════════════ -->
-<div class="tab-content" id="tab-sa">
+     =============================================================== -->
+<div class="tab-content" id="tab-sa" role="tabpanel" aria-labelledby="tab-sa-label">
 <div class="container"><div id="sa-area"></div></div>
 </div>
 
 <script>
 function switchTab(id){
-  document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
-  document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
-  document.querySelector(`[data-tab="${id}"]`).classList.add('active');
+  document.querySelectorAll('.nav-tab').forEach(function(t){
+    t.classList.remove('active');
+    t.setAttribute('aria-selected','false');
+  });
+  document.querySelectorAll('.tab-content').forEach(function(t){t.classList.remove('active');});
+  var btn = document.querySelector('[data-tab="'+id+'"]');
+  btn.classList.add('active');
+  btn.setAttribute('aria-selected','true');
   document.getElementById('tab-'+id).classList.add('active');
+  // Announce tab change for screen readers
+  announce('Switched to '+btn.textContent+' tab');
+}
+
+function announce(msg){
+  var el = document.getElementById('live-announce');
+  if(el){ el.textContent = msg; }
 }
 
 // ============================================================
 // QUIZ DATA
 // ============================================================
-const quizData=[
+var quizData=[
 // EASY (30)
-{q:"What is the molecular formula of water?",opts:["HO","H₂O","H₂O₂","OH⁻"],ans:1,exp:"Water is H₂O: two hydrogens bonded to one oxygen.",diff:"easy",cat:"Structure"},
-{q:"What is the molecular geometry (shape) of water?",opts:["Linear","Tetrahedral","Bent","Trigonal planar"],ans:2,exp:"Water has a bent shape with a bond angle of ~104.5°. Two bonding pairs and two lone pairs on oxygen create this geometry.",diff:"easy",cat:"Structure"},
-{q:"The bond angle in water is approximately:",opts:["90°","104.5°","109.5°","180°"],ans:1,exp:"The bond angle is ~104.5°, squeezed below the tetrahedral 109.5° by the two lone pairs on oxygen.",diff:"easy",cat:"Structure"},
+{q:"What is the molecular formula of water?",opts:["HO","H\u2082O","H\u2082O\u2082","OH\u207B"],ans:1,exp:"Water is H\u2082O: two hydrogens bonded to one oxygen.",diff:"easy",cat:"Structure"},
+{q:"What is the molecular geometry (shape) of water?",opts:["Linear","Tetrahedral","Bent","Trigonal planar"],ans:2,exp:"Water has a bent shape with a bond angle of ~104.5\u00B0. Two bonding pairs and two lone pairs on oxygen create this geometry.",diff:"easy",cat:"Structure"},
+{q:"The bond angle in water is approximately:",opts:["90\u00B0","104.5\u00B0","109.5\u00B0","180\u00B0"],ans:1,exp:"The bond angle is ~104.5\u00B0, squeezed below the tetrahedral 109.5\u00B0 by the two lone pairs on oxygen.",diff:"easy",cat:"Structure"},
 {q:"Water is a polar molecule because:",opts:["It contains oxygen","It has a bent shape and unequal charge distribution","It is a liquid at room temperature","It has a high molecular weight"],ans:1,exp:"The bent shape means the O-H bond dipoles do not cancel, giving water a positive end and a negative end.",diff:"easy",cat:"Polarity"},
-{q:"Which atom in water carries the partial negative charge (δ−)?",opts:["Hydrogen","Oxygen","Both equally","Neither"],ans:1,exp:"Oxygen is more electronegative and pulls shared electrons closer, giving it a partial negative charge.",diff:"easy",cat:"Polarity"},
+{q:"Which atom in water carries the partial negative charge (\u03B4\u2212)?",opts:["Hydrogen","Oxygen","Both equally","Neither"],ans:1,exp:"Oxygen is more electronegative and pulls shared electrons closer, giving it a partial negative charge.",diff:"easy",cat:"Polarity"},
 {q:"Electronegativity is:",opts:["The charge of an ion","An atom's tendency to attract shared electrons in a bond","The energy needed to remove an electron","The number of protons in an atom"],ans:1,exp:"Electronegativity measures how strongly an atom attracts electrons in a covalent bond.",diff:"easy",cat:"Polarity"},
-{q:"A hydrogen bond forms between:",opts:["Two hydrogen atoms","A δ+ hydrogen and a δ− electronegative atom on another molecule","Two oxygen atoms","A proton and a neutron"],ans:1,exp:"Hydrogen bonds are attractions between a δ+ H on one molecule and a δ− O, N, or F on another molecule.",diff:"easy",cat:"H-Bonding"},
+{q:"A hydrogen bond forms between:",opts:["Two hydrogen atoms","A \u03B4+ hydrogen and a \u03B4\u2212 electronegative atom on another molecule","Two oxygen atoms","A proton and a neutron"],ans:1,exp:"Hydrogen bonds are attractions between a \u03B4+ H on one molecule and a \u03B4\u2212 O, N, or F on another molecule.",diff:"easy",cat:"H-Bonding"},
 {q:"How many hydrogen bonds can a single water molecule form at once?",opts:["1","2","3","4"],ans:3,exp:"Up to 4: each H can donate one bond, and each lone pair on O can accept one bond (2 + 2 = 4).",diff:"easy",cat:"H-Bonding"},
 {q:"Are hydrogen bonds stronger or weaker than covalent bonds?",opts:["Much stronger","About the same","Much weaker","It depends on temperature"],ans:2,exp:"Individual hydrogen bonds are about 5% the strength of a covalent bond. Their power comes from sheer numbers.",diff:"easy",cat:"H-Bonding"},
 {q:"Cohesion is:",opts:["Water sticking to glass","Water molecules attracting each other","Water evaporating","Water freezing"],ans:1,exp:"Cohesion = water molecules attracted to other water molecules, due to hydrogen bonding.",diff:"easy",cat:"Properties"},
 {q:"Adhesion is:",opts:["Water molecules attracting each other","Water molecules attracting other polar surfaces","Water boiling","Ice forming"],ans:1,exp:"Adhesion = water attracted to other substances (like glass or plant cell walls).",diff:"easy",cat:"Properties"},
 {q:"Surface tension is caused by:",opts:["Gravity","Adhesion to air","Cohesion among surface water molecules","Dissolved salts"],ans:2,exp:"Surface molecules form hydrogen bonds only sideways and downward, creating an inward pull that makes the surface resist disruption.",diff:"easy",cat:"Properties"},
-{q:"Water's specific heat is:",opts:["1.00 J/g·°C","2.26 J/g·°C","4.18 J/g·°C","100 J/g·°C"],ans:2,exp:"Water's specific heat is 4.18 J/g·°C, which is high compared to most substances.",diff:"easy",cat:"Thermal"},
+{q:"Water's specific heat is:",opts:["1.00 J/g\u00B7\u00B0C","2.26 J/g\u00B7\u00B0C","4.18 J/g\u00B7\u00B0C","100 J/g\u00B7\u00B0C"],ans:2,exp:"Water's specific heat is 4.18 J/g\u00B7\u00B0C, which is high compared to most substances.",diff:"easy",cat:"Thermal"},
 {q:"High specific heat means water:",opts:["Heats up very quickly","Resists temperature changes","Boils at a low temperature","Freezes easily"],ans:1,exp:"High specific heat means a lot of energy is needed to change water's temperature. Water warms slowly and cools slowly.",diff:"easy",cat:"Thermal"},
 {q:"Evaporative cooling works because:",opts:["Cold air surrounds the body","The fastest (hottest) molecules escape as vapor, taking heat with them","Water absorbs heat from the sun","Ice melts on the skin"],ans:1,exp:"Vaporization removes the highest-energy molecules from the surface, lowering the average energy (temperature) of what remains.",diff:"easy",cat:"Thermal"},
 {q:"Ice floats because:",opts:["It has no hydrogen bonds","Its crystal lattice is more open and less dense than liquid water","It is warmer than liquid water","It contains air bubbles"],ans:1,exp:"In ice, hydrogen bonds lock molecules into a spacious lattice with gaps, making ice less dense than liquid water.",diff:"easy",cat:"Ice/Density"},
-{q:"The density of liquid water at 4°C is:",opts:["0.917 g/mL","1.00 g/mL","1.25 g/mL","0.50 g/mL"],ans:1,exp:"Water is densest at 4°C (1.00 g/mL). Ice at 0°C is 0.917 g/mL.",diff:"easy",cat:"Ice/Density"},
-{q:"pH is defined as:",opts:["The concentration of OH⁻","−log[H⁺]","log[OH⁻]","[H⁺] × [OH⁻]"],ans:1,exp:"pH = −log[H⁺]. It measures hydrogen ion concentration on a logarithmic scale.",diff:"easy",cat:"pH"},
-{q:"Pure water has a pH of:",opts:["0","5","7","14"],ans:2,exp:"Pure water at 25°C has [H⁺] = 10⁻⁷ M, so pH = 7 (neutral).",diff:"easy",cat:"pH"},
-{q:"A solution with pH 3 is:",opts:["Neutral","Basic","Acidic","Cannot be determined"],ans:2,exp:"pH < 7 is acidic. pH 3 has a high H⁺ concentration.",diff:"easy",cat:"pH"},
-{q:"Each pH unit represents a fold change in [H⁺] of:",opts:["2-fold","5-fold","10-fold","100-fold"],ans:2,exp:"The pH scale is logarithmic. Each unit = 10× change in [H⁺].",diff:"easy",cat:"pH"},
-{q:"An acid is a substance that:",opts:["Accepts protons","Donates protons (H⁺)","Produces OH⁻","Raises pH"],ans:1,exp:"By the Brønsted-Lowry definition, an acid is a proton (H⁺) donor.",diff:"easy",cat:"pH"},
-{q:"A base is a substance that:",opts:["Donates protons","Accepts protons (H⁺)","Lowers pH","Produces H⁺"],ans:1,exp:"A Brønsted-Lowry base accepts protons (H⁺).",diff:"easy",cat:"pH"},
+{q:"The density of liquid water at 4\u00B0C is:",opts:["0.917 g/mL","1.00 g/mL","1.25 g/mL","0.50 g/mL"],ans:1,exp:"Water is densest at 4\u00B0C (1.00 g/mL). Ice at 0\u00B0C is 0.917 g/mL.",diff:"easy",cat:"Ice/Density"},
+{q:"pH is defined as:",opts:["The concentration of OH\u207B","\u2212log[H\u207A]","log[OH\u207B]","[H\u207A] \u00D7 [OH\u207B]"],ans:1,exp:"pH = \u2212log[H\u207A]. It measures hydrogen ion concentration on a logarithmic scale.",diff:"easy",cat:"pH"},
+{q:"Pure water has a pH of:",opts:["0","5","7","14"],ans:2,exp:"Pure water at 25\u00B0C has [H\u207A] = 10\u207B\u2077 M, so pH = 7 (neutral).",diff:"easy",cat:"pH"},
+{q:"A solution with pH 3 is:",opts:["Neutral","Basic","Acidic","Cannot be determined"],ans:2,exp:"pH < 7 is acidic. pH 3 has a high H\u207A concentration.",diff:"easy",cat:"pH"},
+{q:"Each pH unit represents a fold change in [H\u207A] of:",opts:["2-fold","5-fold","10-fold","100-fold"],ans:2,exp:"The pH scale is logarithmic. Each unit = 10\u00D7 change in [H\u207A].",diff:"easy",cat:"pH"},
+{q:"An acid is a substance that:",opts:["Accepts protons","Donates protons (H\u207A)","Produces OH\u207B","Raises pH"],ans:1,exp:"By the Br\u00F8nsted-Lowry definition, an acid is a proton (H\u207A) donor.",diff:"easy",cat:"pH"},
+{q:"A base is a substance that:",opts:["Donates protons","Accepts protons (H\u207A)","Lowers pH","Produces H\u207A"],ans:1,exp:"A Br\u00F8nsted-Lowry base accepts protons (H\u207A).",diff:"easy",cat:"pH"},
 {q:"'Like dissolves like' means:",opts:["All solids dissolve in water","Polar solvents dissolve polar solutes; nonpolar dissolves nonpolar","Hot solvents dissolve everything","Acids dissolve bases"],ans:1,exp:"Polar/ionic solutes dissolve in polar solvents (water). Nonpolar solutes dissolve in nonpolar solvents.",diff:"easy",cat:"Solvent"},
 {q:"Hydrophilic means:",opts:["Water-fearing","Water-loving","Fat-loving","Heat-loving"],ans:1,exp:"Hydrophilic = water-loving. These substances (polar/ionic) dissolve readily in water.",diff:"easy",cat:"Solvent"},
 {q:"Hydrophobic substances are:",opts:["Polar","Ionic","Nonpolar","Charged"],ans:2,exp:"Hydrophobic = water-fearing. Nonpolar substances (oils, fats) do not dissolve in water.",diff:"easy",cat:"Solvent"},
@@ -578,86 +611,86 @@ const quizData=[
 {q:"Normal human blood pH is:",opts:["6.0 to 6.5","7.0 exactly","7.35 to 7.45","8.0 to 8.5"],ans:2,exp:"Blood pH is tightly regulated between 7.35 and 7.45. Outside this range is dangerous.",diff:"easy",cat:"Buffers"},
 
 // MEDIUM (15)
-{q:"Why is water's boiling point (100°C) unusually high for a molecule of its size?",opts:["Because oxygen is heavy","Because hydrogen bonds must be broken for molecules to escape into the gas phase","Because water contains three atoms","Because of ionic bonding"],ans:1,exp:"Hydrogen bonds hold water molecules together. Breaking them requires substantial energy, raising the boiling point far above what molecular weight alone predicts.",diff:"medium",cat:"Thermal"},
-{q:"Water reaches maximum density at:",opts:["0°C","4°C","25°C","100°C"],ans:1,exp:"Water is densest at 4°C. Below that, hydrogen bonding begins forming the open ice lattice, expanding the volume.",diff:"medium",cat:"Ice/Density"},
-{q:"If [H⁺] = 1 × 10⁻⁹ M, the solution is:",opts:["Strongly acidic","Weakly acidic","Neutral","Basic"],ans:3,exp:"pH = −log(10⁻⁹) = 9. pH > 7 is basic.",diff:"medium",cat:"pH"},
-{q:"A solution at pH 2 has how many times more H⁺ than a solution at pH 5?",opts:["3 times","30 times","300 times","1,000 times"],ans:3,exp:"3 pH units difference = 10³ = 1,000 times more H⁺ ions.",diff:"medium",cat:"pH"},
-{q:"K_w = [H⁺][OH⁻] = 10⁻¹⁴. If [H⁺] = 10⁻³ M, what is [OH⁻]?",opts:["10⁻³ M","10⁻⁷ M","10⁻¹¹ M","10⁻¹⁴ M"],ans:2,exp:"[OH⁻] = Kw/[H⁺] = 10⁻¹⁴/10⁻³ = 10⁻¹¹ M.",diff:"medium",cat:"pH"},
+{q:"Why is water's boiling point (100\u00B0C) unusually high for a molecule of its size?",opts:["Because oxygen is heavy","Because hydrogen bonds must be broken for molecules to escape into the gas phase","Because water contains three atoms","Because of ionic bonding"],ans:1,exp:"Hydrogen bonds hold water molecules together. Breaking them requires substantial energy, raising the boiling point far above what molecular weight alone predicts.",diff:"medium",cat:"Thermal"},
+{q:"Water reaches maximum density at:",opts:["0\u00B0C","4\u00B0C","25\u00B0C","100\u00B0C"],ans:1,exp:"Water is densest at 4\u00B0C. Below that, hydrogen bonding begins forming the open ice lattice, expanding the volume.",diff:"medium",cat:"Ice/Density"},
+{q:"If [H\u207A] = 1 \u00D7 10\u207B\u2079 M, the solution is:",opts:["Strongly acidic","Weakly acidic","Neutral","Basic"],ans:3,exp:"pH = \u2212log(10\u207B\u2079) = 9. pH > 7 is basic.",diff:"medium",cat:"pH"},
+{q:"A solution at pH 2 has how many times more H\u207A than a solution at pH 5?",opts:["3 times","30 times","300 times","1,000 times"],ans:3,exp:"3 pH units difference = 10\u00B3 = 1,000 times more H\u207A ions.",diff:"medium",cat:"pH"},
+{q:"K_w = [H\u207A][OH\u207B] = 10\u207B\u00B9\u2074. If [H\u207A] = 10\u207B\u00B3 M, what is [OH\u207B]?",opts:["10\u207B\u00B3 M","10\u207B\u2077 M","10\u207B\u00B9\u00B9 M","10\u207B\u00B9\u2074 M"],ans:2,exp:"[OH\u207B] = Kw/[H\u207A] = 10\u207B\u00B9\u2074/10\u207B\u00B3 = 10\u207B\u00B9\u00B9 M.",diff:"medium",cat:"pH"},
 {q:"Capillary action in a plant's xylem relies on:",opts:["Cohesion only","Adhesion only","Both cohesion and adhesion","Active transport"],ans:2,exp:"Adhesion pulls water up the walls; cohesion keeps the water column intact. Both are needed.",diff:"medium",cat:"Properties"},
 {q:"Amphipathic molecules have:",opts:["Only hydrophilic regions","Only hydrophobic regions","Both hydrophilic and hydrophobic regions","No interaction with water"],ans:2,exp:"Amphipathic molecules (like phospholipids) have a polar (hydrophilic) head and nonpolar (hydrophobic) tails.",diff:"medium",cat:"Solvent"},
 {q:"The electron geometry of water is ___, but the molecular geometry is ___.",opts:["Linear; bent","Tetrahedral; bent","Bent; tetrahedral","Trigonal planar; bent"],ans:1,exp:"4 electron groups (2 bonds + 2 lone pairs) = tetrahedral electron geometry. 2 bonded atoms = bent molecular geometry.",diff:"medium",cat:"Structure"},
-{q:"A buffer works by:",opts:["Removing all H⁺ ions","Containing a weak acid that donates H⁺ and its conjugate base that accepts H⁺","Adding strong acid to neutralize base","Diluting the solution"],ans:1,exp:"Buffers contain a weak acid/conjugate base pair. The acid neutralizes added base; the conjugate base neutralizes added acid.",diff:"medium",cat:"Buffers"},
-{q:"The bicarbonate buffer system in blood involves the equilibrium:",opts:["NaCl <span aria-hidden="true">⇌</span> Na⁺ + Cl⁻","CO₂ + H₂O <span aria-hidden="true">⇌</span> H₂CO₃ <span aria-hidden="true">⇌</span> H⁺ + HCO₃⁻","O₂ + H₂O <span aria-hidden="true">⇌</span> H₂O₂","NH₃ + H₂O <span aria-hidden="true">⇌</span> NH₄⁺ + OH⁻"],ans:1,exp:"CO₂ dissolves to form carbonic acid, which dissociates to H⁺ and bicarbonate. This is the primary blood buffer.",diff:"medium",cat:"Buffers"},
+{q:"A buffer works by:",opts:["Removing all H\u207A ions","Containing a weak acid that donates H\u207A and its conjugate base that accepts H\u207A","Adding strong acid to neutralize base","Diluting the solution"],ans:1,exp:"Buffers contain a weak acid/conjugate base pair. The acid neutralizes added base; the conjugate base neutralizes added acid.",diff:"medium",cat:"Buffers"},
+{q:"The bicarbonate buffer system in blood involves the equilibrium:",opts:["NaCl \u21CC Na\u207A + Cl\u207B","CO\u2082 + H\u2082O \u21CC H\u2082CO\u2083 \u21CC H\u207A + HCO\u2083\u207B","O\u2082 + H\u2082O \u21CC H\u2082O\u2082","NH\u2083 + H\u2082O \u21CC NH\u2084\u207A + OH\u207B"],ans:1,exp:"CO\u2082 dissolves to form carbonic acid, which dissociates to H\u207A and bicarbonate. This is the primary blood buffer.",diff:"medium",cat:"Buffers"},
 {q:"Why does sweating cool the body?",opts:["Sweat is cold when it exits the body","Evaporation of sweat removes the highest-energy molecules, lowering skin temperature","Salt in sweat absorbs heat","Sweat reflects sunlight"],ans:1,exp:"Evaporation selectively removes high-energy molecules. This lowers the average kinetic energy (temperature) of remaining molecules on the skin surface.",diff:"medium",cat:"Thermal"},
-{q:"In the reaction q = mcΔT, if you add 4,180 J to 1 kg of water, the temperature change is:",opts:["0.1°C","1°C","10°C","100°C"],ans:1,exp:"q = mcΔT. 4180 = (1000 g)(4.18)(ΔT). ΔT = 4180/4180 = 1°C.",diff:"medium",cat:"Thermal"},
+{q:"In the reaction q = mc\u0394T, if you add 4,180 J to 1 kg of water, the temperature change is:",opts:["0.1\u00B0C","1\u00B0C","10\u00B0C","100\u00B0C"],ans:1,exp:"q = mc\u0394T. 4180 = (1000 g)(4.18)(\u0394T). \u0394T = 4180/4180 = 1\u00B0C.",diff:"medium",cat:"Thermal"},
 {q:"Phospholipid bilayers form spontaneously in water because:",opts:["Covalent bonds force them together","Hydrophobic tails are pushed away from water while hydrophilic heads face water","Gravity pulls them into layers","ATP provides energy for assembly"],ans:1,exp:"The hydrophobic effect drives bilayer formation. Tails cluster to avoid water; heads face the aqueous environment. No energy input needed.",diff:"medium",cat:"Solvent"},
-{q:"A solution with [OH⁻] = 10⁻⁴ M has a pH of:",opts:["4","7","10","14"],ans:2,exp:"pOH = −log(10⁻⁴) = 4. pH = 14 − pOH = 14 − 4 = 10.",diff:"medium",cat:"pH"},
-{q:"Water is a reactant in which of these biological processes?",opts:["Photosynthesis and hydrolysis","Dehydration synthesis","Fermentation","Glycolysis only"],ans:0,exp:"Water is split in photosynthesis (provides electrons and O₂) and consumed in hydrolysis (breaks polymer bonds).",diff:"medium",cat:"Bio Reactions"},
+{q:"A solution with [OH\u207B] = 10\u207B\u2074 M has a pH of:",opts:["4","7","10","14"],ans:2,exp:"pOH = \u2212log(10\u207B\u2074) = 4. pH = 14 \u2212 pOH = 14 \u2212 4 = 10.",diff:"medium",cat:"pH"},
+{q:"Water is a reactant in which of these biological processes?",opts:["Photosynthesis and hydrolysis","Dehydration synthesis","Fermentation","Glycolysis only"],ans:0,exp:"Water is split in photosynthesis (provides electrons and O\u2082) and consumed in hydrolysis (breaks polymer bonds).",diff:"medium",cat:"Bio Reactions"},
 
 // HARD (8)
-{q:"Why is water's bond angle 104.5° rather than the ideal tetrahedral 109.5°?",opts:["Oxygen is too small","Lone pairs occupy more space than bonding pairs and compress the bond angle","Hydrogen atoms repel each other","The molecule vibrates and the angle is an average"],ans:1,exp:"Lone pairs exert greater repulsion than bonding pairs (they spread over more space). The two lone pairs push the O-H bonds closer together, reducing the angle from 109.5° to 104.5°.",diff:"hard",cat:"Structure"},
-{q:"Methane (CH₄, MW 16) boils at −161°C while water (H₂O, MW 18) boils at 100°C. The best explanation for this 261°C difference is:",opts:["Oxygen is heavier than carbon","Water has hydrogen bonds; methane has only London dispersion forces","Water has more atoms","Methane is a gas at all temperatures"],ans:1,exp:"Despite similar molecular weights, water's extensive hydrogen bonding network requires far more energy to disrupt than methane's weak London dispersion forces.",diff:"hard",cat:"H-Bonding"},
-{q:"A buffer is most effective when pH equals the pKa of the weak acid. At this point, the ratio [A⁻]/[HA] is:",opts:["0","0.5","1.0","10"],ans:2,exp:"From Henderson-Hasselbalch: pH = pKa + log([A⁻]/[HA]). When pH = pKa, log([A⁻]/[HA]) = 0, so [A⁻]/[HA] = 1 (equal concentrations).",diff:"hard",cat:"Buffers"},
-{q:"A patient's blood pH drops to 7.25. In the bicarbonate buffer system, which direction does the equilibrium shift, and how do the lungs compensate?",opts:["Shift left; lungs breathe faster to exhale more CO₂","Shift right; lungs breathe slower","Shift left; lungs breathe slower","No shift occurs; kidneys handle it alone"],ans:0,exp:"Acidosis (pH < 7.35). The equilibrium CO₂ + H₂O ⇌ H₂CO₃ ⇌ H⁺ + HCO₃⁻ shifts left to consume excess H⁺. The lungs increase ventilation to blow off CO₂, pulling the equilibrium further left and raising pH.",diff:"hard",cat:"Buffers"},
+{q:"Why is water's bond angle 104.5\u00B0 rather than the ideal tetrahedral 109.5\u00B0?",opts:["Oxygen is too small","Lone pairs occupy more space than bonding pairs and compress the bond angle","Hydrogen atoms repel each other","The molecule vibrates and the angle is an average"],ans:1,exp:"Lone pairs exert greater repulsion than bonding pairs (they spread over more space). The two lone pairs push the O-H bonds closer together, reducing the angle from 109.5\u00B0 to 104.5\u00B0.",diff:"hard",cat:"Structure"},
+{q:"Methane (CH\u2084, MW 16) boils at \u2212161\u00B0C while water (H\u2082O, MW 18) boils at 100\u00B0C. The best explanation for this 261\u00B0C difference is:",opts:["Oxygen is heavier than carbon","Water has hydrogen bonds; methane has only London dispersion forces","Water has more atoms","Methane is a gas at all temperatures"],ans:1,exp:"Despite similar molecular weights, water's extensive hydrogen bonding network requires far more energy to disrupt than methane's weak London dispersion forces.",diff:"hard",cat:"H-Bonding"},
+{q:"A buffer is most effective when pH equals the pKa of the weak acid. At this point, the ratio [A\u207B]/[HA] is:",opts:["0","0.5","1.0","10"],ans:2,exp:"From Henderson-Hasselbalch: pH = pKa + log([A\u207B]/[HA]). When pH = pKa, log([A\u207B]/[HA]) = 0, so [A\u207B]/[HA] = 1 (equal concentrations).",diff:"hard",cat:"Buffers"},
+{q:"A patient's blood pH drops to 7.25. In the bicarbonate buffer system, which direction does the equilibrium shift, and how do the lungs compensate?",opts:["Shift left; lungs breathe faster to exhale more CO\u2082","Shift right; lungs breathe slower","Shift left; lungs breathe slower","No shift occurs; kidneys handle it alone"],ans:0,exp:"Acidosis (pH < 7.35). The equilibrium CO\u2082 + H\u2082O \u21CC H\u2082CO\u2083 \u21CC H\u207A + HCO\u2083\u207B shifts left to consume excess H\u207A. The lungs increase ventilation to blow off CO\u2082, pulling the equilibrium further left and raising pH.",diff:"hard",cat:"Buffers"},
 {q:"If ice did not float, what would be the most significant biological consequence?",opts:["Ocean surface temperatures would increase","Aquatic organisms in lakes and oceans could not survive winter because water would freeze from the bottom up","Rain patterns would change","Photosynthesis would stop"],ans:1,exp:"If ice sank, bodies of water would freeze solid from the bottom up. The insulating surface ice layer would never form, and aquatic ecosystems would be destroyed in cold climates.",diff:"hard",cat:"Ice/Density"},
-{q:"CO₂ is a nonpolar molecule despite having polar C=O bonds. Water is polar with polar O-H bonds. The difference is explained by:",opts:["Oxygen is in both molecules","CO₂ is linear so dipoles cancel; water is bent so dipoles do not cancel","CO₂ has double bonds","Water has lone pairs and CO₂ does not"],ans:1,exp:"CO₂ is linear (180°), so the two equal C=O dipoles point in opposite directions and cancel. Water is bent (104.5°), so the O-H dipoles partially add, creating a net dipole.",diff:"hard",cat:"Polarity"},
-{q:"A researcher needs a buffer at pH 7.4. Available weak acids: acetic acid (pKa 4.76), carbonic acid (pKa 6.35), dihydrogen phosphate (pKa 7.21), ammonium (pKa 9.25). Which is the best choice?",opts:["Acetic acid","Carbonic acid","Dihydrogen phosphate","Ammonium"],ans:2,exp:"Buffers work best within ±1 pH unit of the pKa. Dihydrogen phosphate (pKa 7.21) is closest to 7.4. The phosphate buffer system is indeed widely used in biological research at physiological pH.",diff:"hard",cat:"Buffers"},
+{q:"CO\u2082 is a nonpolar molecule despite having polar C=O bonds. Water is polar with polar O-H bonds. The difference is explained by:",opts:["Oxygen is in both molecules","CO\u2082 is linear so dipoles cancel; water is bent so dipoles do not cancel","CO\u2082 has double bonds","Water has lone pairs and CO\u2082 does not"],ans:1,exp:"CO\u2082 is linear (180\u00B0), so the two equal C=O dipoles point in opposite directions and cancel. Water is bent (104.5\u00B0), so the O-H dipoles partially add, creating a net dipole.",diff:"hard",cat:"Polarity"},
+{q:"A researcher needs a buffer at pH 7.4. Available weak acids: acetic acid (pKa 4.76), carbonic acid (pKa 6.35), dihydrogen phosphate (pKa 7.21), ammonium (pKa 9.25). Which is the best choice?",opts:["Acetic acid","Carbonic acid","Dihydrogen phosphate","Ammonium"],ans:2,exp:"Buffers work best within \u00B11 pH unit of the pKa. Dihydrogen phosphate (pKa 7.21) is closest to 7.4. The phosphate buffer system is indeed widely used in biological research at physiological pH.",diff:"hard",cat:"Buffers"},
 {q:"Explain why the hydrophobic effect is considered entropy-driven rather than enthalpy-driven.",opts:["Breaking hydrogen bonds releases heat","Nonpolar molecules in water force water into ordered cages (clathrates); removing them increases water's disorder (entropy)","Hydrophobic molecules absorb energy","Nonpolar molecules form strong bonds with each other"],ans:1,exp:"When nonpolar molecules are in water, surrounding water molecules form highly ordered cage-like structures (clathrates). Clustering the nonpolar molecules together releases these constrained water molecules, increasing the overall entropy of the system. The driving force is the gain in water entropy, not bonding between the nonpolar molecules themselves.",diff:"hard",cat:"Solvent"}
 ];
 
 // ============================================================
 // FLASHCARD DATA
 // ============================================================
-const fcData=[
-{f:"Molecular formula of water?",b:"H₂O",cat:"Structure"},
-{f:"Molecular geometry of water?",b:"Bent (~104.5° bond angle)",cat:"Structure"},
+var fcData=[
+{f:"Molecular formula of water?",b:"H\u2082O",cat:"Structure"},
+{f:"Molecular geometry of water?",b:"Bent (~104.5\u00B0 bond angle)",cat:"Structure"},
 {f:"Electron geometry of water?",b:"Tetrahedral (4 electron groups: 2 bonds + 2 lone pairs)",cat:"Structure"},
-{f:"Why is the bond angle 104.5° and not 109.5°?",b:"Lone pairs repel more strongly than bonding pairs, compressing the angle below the ideal tetrahedral.",cat:"Structure"},
+{f:"Why is the bond angle 104.5\u00B0 and not 109.5\u00B0?",b:"Lone pairs repel more strongly than bonding pairs, compressing the angle below the ideal tetrahedral.",cat:"Structure"},
 {f:"What type of bond holds H to O within a water molecule?",b:"Polar covalent bond.",cat:"Structure"},
 {f:"Electronegativity of O vs. H?",b:"O = 3.44, H = 2.20. Oxygen is much more electronegative.",cat:"Polarity"},
 {f:"Why is water polar?",b:"Bent shape + unequal electron sharing. The O-H bond dipoles do not cancel.",cat:"Polarity"},
-{f:"Which end of water is δ+ and which is δ−?",b:"Hydrogens are δ+ (partial positive). Oxygen is δ− (partial negative).",cat:"Polarity"},
-{f:"What is a hydrogen bond?",b:"Attraction between a δ+ hydrogen on one molecule and a δ− electronegative atom (O, N, or F) on another.",cat:"H-Bonding"},
+{f:"Which end of water is \u03B4+ and which is \u03B4\u2212?",b:"Hydrogens are \u03B4+ (partial positive). Oxygen is \u03B4\u2212 (partial negative).",cat:"Polarity"},
+{f:"What is a hydrogen bond?",b:"Attraction between a \u03B4+ hydrogen on one molecule and a \u03B4\u2212 electronegative atom (O, N, or F) on another.",cat:"H-Bonding"},
 {f:"Max hydrogen bonds per water molecule?",b:"4 (two donated by H atoms, two accepted by lone pairs on O).",cat:"H-Bonding"},
 {f:"Hydrogen bond strength vs. covalent?",b:"~5% as strong as a covalent bond. Individually weak, collectively powerful.",cat:"H-Bonding"},
-{f:"Where do hydrogen bonds appear in biology?",b:"Water properties, DNA base pairing (A-T: 2, G-C: 3), protein secondary structure (α-helices, β-sheets).",cat:"H-Bonding"},
+{f:"Where do hydrogen bonds appear in biology?",b:"Water properties, DNA base pairing (A-T: 2, G-C: 3), protein secondary structure (\u03B1-helices, \u03B2-sheets).",cat:"H-Bonding"},
 {f:"Cohesion?",b:"Water molecules attracted to each other (via hydrogen bonds).",cat:"Properties"},
 {f:"Adhesion?",b:"Water molecules attracted to other polar surfaces (glass, cellulose in xylem).",cat:"Properties"},
 {f:"Surface tension?",b:"Inward pull at air-water interface. Surface molecules bond sideways/down only, creating an elastic-like film.",cat:"Properties"},
 {f:"Capillary action?",b:"Water rising in narrow tubes. Adhesion pulls it up the walls; cohesion pulls the column along.",cat:"Properties"},
 {f:"Cohesion-tension theory?",b:"Water transport in plants: transpiration pulls water up through xylem, held together by cohesion and pulled along walls by adhesion.",cat:"Properties"},
 {f:"Meniscus: which part do you read?",b:"Read at the bottom of the meniscus. The curve is caused by adhesion to glass.",cat:"Properties"},
-{f:"Specific heat of water?",b:"4.18 J/g·°C. High because energy goes into breaking hydrogen bonds before raising temperature.",cat:"Thermal"},
+{f:"Specific heat of water?",b:"4.18 J/g\u00B7\u00B0C. High because energy goes into breaking hydrogen bonds before raising temperature.",cat:"Thermal"},
 {f:"Heat of vaporization of water?",b:"2,260 J/g (40.7 kJ/mol). High because all hydrogen bonds must break for a molecule to escape.",cat:"Thermal"},
-{f:"Why does water boil at 100°C instead of being a gas like methane?",b:"Extensive hydrogen bonding holds molecules together. Methane (similar MW) has only weak London dispersion forces and boils at −161°C.",cat:"Thermal"},
-{f:"q = mcΔT: what does each variable represent?",b:"q = heat (J), m = mass (g), c = specific heat (J/g·°C), ΔT = temperature change.",cat:"Thermal"},
+{f:"Why does water boil at 100\u00B0C instead of being a gas like methane?",b:"Extensive hydrogen bonding holds molecules together. Methane (similar MW) has only weak London dispersion forces and boils at \u2212161\u00B0C.",cat:"Thermal"},
+{f:"q = mc\u0394T: what does each variable represent?",b:"q = heat (J), m = mass (g), c = specific heat (J/g\u00B7\u00B0C), \u0394T = temperature change.",cat:"Thermal"},
 {f:"Evaporative cooling mechanism?",b:"Highest-energy molecules escape as vapor, lowering the average energy (temperature) of remaining liquid.",cat:"Thermal"},
 {f:"'Like dissolves like' means?",b:"Polar dissolves polar/ionic. Nonpolar dissolves nonpolar.",cat:"Solvent"},
 {f:"Hydrophilic vs. hydrophobic?",b:"Hydrophilic = water-loving (polar/ionic, dissolves). Hydrophobic = water-fearing (nonpolar, does not dissolve).",cat:"Solvent"},
 {f:"Amphipathic?",b:"Molecule with both hydrophilic and hydrophobic regions. Example: phospholipids.",cat:"Solvent"},
 {f:"What is a hydration shell?",b:"Layer of water molecules surrounding a dissolved ion, stabilizing it in solution.",cat:"Solvent"},
 {f:"Why do phospholipid bilayers form spontaneously?",b:"Hydrophobic effect: tails avoid water, heads face water. Driven by entropy gain when ordered water cages are released.",cat:"Solvent"},
-{f:"Density of ice vs. liquid water?",b:"Ice: 0.917 g/mL. Liquid water at 4°C: 1.00 g/mL. Ice is less dense.",cat:"Ice/Density"},
+{f:"Density of ice vs. liquid water?",b:"Ice: 0.917 g/mL. Liquid water at 4\u00B0C: 1.00 g/mL. Ice is less dense.",cat:"Ice/Density"},
 {f:"Why is ice less dense?",b:"Hydrogen bonds form a rigid, open crystalline lattice with gaps. More volume per molecule than liquid.",cat:"Ice/Density"},
 {f:"Biological importance of ice floating?",b:"Surface ice insulates water below, keeping it liquid and protecting aquatic life in winter.",cat:"Ice/Density"},
-{f:"Temperature of maximum water density?",b:"4°C. Below this, expansion toward ice lattice begins.",cat:"Ice/Density"},
-{f:"pH formula?",b:"pH = −log[H⁺]",cat:"pH"},
-{f:"pH of pure water at 25°C?",b:"7.0 ([H⁺] = [OH⁻] = 10⁻⁷ M)",cat:"pH"},
-{f:"Kw value?",b:"Kw = [H⁺][OH⁻] = 1 × 10⁻¹⁴ at 25°C",cat:"pH"},
-{f:"Acidic pH range?",b:"Below 7 (higher [H⁺] than pure water).",cat:"pH"},
-{f:"Basic pH range?",b:"Above 7 (lower [H⁺], higher [OH⁻] than pure water).",cat:"pH"},
-{f:"pH scale is logarithmic: what does this mean?",b:"Each pH unit = 10-fold change in [H⁺]. pH 3 has 100× more H⁺ than pH 5.",cat:"pH"},
-{f:"Arrhenius acid vs. Brønsted-Lowry acid?",b:"Arrhenius: produces H⁺ in water. Brønsted-Lowry: donates H⁺ (proton donor). BL is broader.",cat:"pH"},
-{f:"Strong acid vs. weak acid?",b:"Strong: dissociates completely (HCl, H₂SO₄). Weak: partially dissociates, reaches equilibrium (acetic acid).",cat:"pH"},
+{f:"Temperature of maximum water density?",b:"4\u00B0C. Below this, expansion toward ice lattice begins.",cat:"Ice/Density"},
+{f:"pH formula?",b:"pH = \u2212log[H\u207A]",cat:"pH"},
+{f:"pH of pure water at 25\u00B0C?",b:"7.0 ([H\u207A] = [OH\u207B] = 10\u207B\u2077 M)",cat:"pH"},
+{f:"Kw value?",b:"Kw = [H\u207A][OH\u207B] = 1 \u00D7 10\u207B\u00B9\u2074 at 25\u00B0C",cat:"pH"},
+{f:"Acidic pH range?",b:"Below 7 (higher [H\u207A] than pure water).",cat:"pH"},
+{f:"Basic pH range?",b:"Above 7 (lower [H\u207A], higher [OH\u207B] than pure water).",cat:"pH"},
+{f:"pH scale is logarithmic: what does this mean?",b:"Each pH unit = 10-fold change in [H\u207A]. pH 3 has 100\u00D7 more H\u207A than pH 5.",cat:"pH"},
+{f:"Arrhenius acid vs. Br\u00F8nsted-Lowry acid?",b:"Arrhenius: produces H\u207A in water. Br\u00F8nsted-Lowry: donates H\u207A (proton donor). BL is broader.",cat:"pH"},
+{f:"Strong acid vs. weak acid?",b:"Strong: dissociates completely (HCl, H\u2082SO\u2084). Weak: partially dissociates, reaches equilibrium (acetic acid).",cat:"pH"},
 {f:"What is a buffer?",b:"Solution of weak acid + conjugate base that resists pH changes when small amounts of acid or base are added.",cat:"Buffers"},
-{f:"Henderson-Hasselbalch equation?",b:"pH = pKa + log([A⁻]/[HA])",cat:"Buffers"},
-{f:"Buffer works best when?",b:"pH is within ±1 unit of the pKa. At pH = pKa, [HA] = [A⁻].",cat:"Buffers"},
-{f:"Blood buffer system?",b:"Bicarbonate: CO₂ + H₂O ⇌ H₂CO₃ ⇌ H⁺ + HCO₃⁻",cat:"Buffers"},
+{f:"Henderson-Hasselbalch equation?",b:"pH = pKa + log([A\u207B]/[HA])",cat:"Buffers"},
+{f:"Buffer works best when?",b:"pH is within \u00B11 unit of the pKa. At pH = pKa, [HA] = [A\u207B].",cat:"Buffers"},
+{f:"Blood buffer system?",b:"Bicarbonate: CO\u2082 + H\u2082O \u21CC H\u2082CO\u2083 \u21CC H\u207A + HCO\u2083\u207B",cat:"Buffers"},
 {f:"Normal blood pH?",b:"7.35 to 7.45",cat:"Buffers"},
 {f:"Acidosis vs. alkalosis?",b:"Acidosis: blood pH < 7.35. Alkalosis: blood pH > 7.45. Both are dangerous.",cat:"Buffers"},
 {f:"Dehydration synthesis?",b:"Joins monomers into polymers by removing water.",cat:"Bio Reactions"},
 {f:"Hydrolysis?",b:"Breaks polymers into monomers by adding water.",cat:"Bio Reactions"},
-{f:"Role of water in photosynthesis?",b:"Reactant. Water is split to provide electrons and release O₂.",cat:"Bio Reactions"},
+{f:"Role of water in photosynthesis?",b:"Reactant. Water is split to provide electrons and release O\u2082.",cat:"Bio Reactions"},
 {f:"Role of water in cellular respiration?",b:"Product. Water is formed at the end of the electron transport chain.",cat:"Bio Reactions"},
 {f:"Human body water content?",b:"~60% by mass.",cat:"Bio Reactions"},
 {f:"MW of water?",b:"18.02 g/mol",cat:"Structure"},
@@ -668,16 +701,16 @@ const fcData=[
 // ============================================================
 // SHORT ANSWER DATA
 // ============================================================
-const saData=[
+var saData=[
 {q:"Explain why water is a polar molecule. Start from electronegativity and end with the molecular shape.",
 concepts:[
-{term:"Electronegativity difference (O > H)",syns:["electronegativ","oxygen pulls","unequal sharing","δ+","δ-","delta","partial charge"],weight:3},
+{term:"Electronegativity difference (O > H)",syns:["electronegativ","oxygen pulls","unequal sharing","\u03B4+","\u03B4-","delta","partial charge"],weight:3},
 {term:"Polar covalent O-H bonds",syns:["polar covalent","polar bond","unequal","shared electrons"],weight:2},
 {term:"Bent molecular geometry",syns:["bent","104.5","bond angle","not linear"],weight:3},
 {term:"Dipoles do not cancel",syns:["dipole","don't cancel","do not cancel","net dipole","asymmetric","add up"],weight:2},
 {term:"Permanent dipole moment",syns:["polar molecule","positive end","negative end","dipole moment"],weight:2}
 ],
-model:"Oxygen is significantly more electronegative than hydrogen (3.44 vs. 2.20), so in each O-H bond, oxygen pulls the shared electrons closer to itself. This creates a polar covalent bond with a partial negative charge (δ−) on oxygen and a partial positive charge (δ+) on each hydrogen. If water were linear, these two bond dipoles would point in opposite directions and cancel out. But water is bent (bond angle ~104.5°) due to the two lone pairs on oxygen, so the dipoles partially add together rather than canceling. The result is a molecule with a permanent dipole moment, with a distinct negative end (oxygen) and positive end (hydrogens)."
+model:"Oxygen is significantly more electronegative than hydrogen (3.44 vs. 2.20), so in each O-H bond, oxygen pulls the shared electrons closer to itself. This creates a polar covalent bond with a partial negative charge (\u03B4\u2212) on oxygen and a partial positive charge (\u03B4+) on each hydrogen. If water were linear, these two bond dipoles would point in opposite directions and cancel out. But water is bent (bond angle ~104.5\u00B0) due to the two lone pairs on oxygen, so the dipoles partially add together rather than canceling. The result is a molecule with a permanent dipole moment, with a distinct negative end (oxygen) and positive end (hydrogens)."
 },
 {q:"Describe the four main emergent properties of water that result from hydrogen bonding, and give one biological example for each.",
 concepts:[
@@ -688,17 +721,17 @@ concepts:[
 {term:"Biological examples (any 2+)",syns:["insect","xylem","body temp","climate","aquatic","lake","transpir","plant","blood"],weight:3},
 {term:"Hydrogen bonding is the cause",syns:["hydrogen bond","h-bond","H bond","intermolecular"],weight:2}
 ],
-model:"All four properties stem from hydrogen bonding. First, cohesion and surface tension: water molecules stick to each other, creating a surface film strong enough for insects to walk on and enabling water transport through plant xylem. Second, high specific heat (4.18 J/g·°C): water absorbs a lot of heat before its temperature rises, which stabilizes body temperature and moderates Earth's climate. Third, high heat of vaporization: evaporation removes high-energy molecules and cools the surface, which is how sweating and transpiration regulate temperature. Fourth, ice is less dense than liquid water because hydrogen bonds lock into a spacious crystal lattice. Floating ice insulates lakes in winter, protecting aquatic life below."
+model:"All four properties stem from hydrogen bonding. First, cohesion and surface tension: water molecules stick to each other, creating a surface film strong enough for insects to walk on and enabling water transport through plant xylem. Second, high specific heat (4.18 J/g\u00B7\u00B0C): water absorbs a lot of heat before its temperature rises, which stabilizes body temperature and moderates Earth's climate. Third, high heat of vaporization: evaporation removes high-energy molecules and cools the surface, which is how sweating and transpiration regulate temperature. Fourth, ice is less dense than liquid water because hydrogen bonds lock into a spacious crystal lattice. Floating ice insulates lakes in winter, protecting aquatic life below."
 },
 {q:"Explain how water dissolves an ionic compound like NaCl. Use the terms hydration shell, hydrophilic, and polarity in your answer.",
 concepts:[
-{term:"Water is polar (δ+ and δ−)",syns:["polar","δ+","δ-","partial charge","dipole"],weight:2},
-{term:"δ− oxygen attracted to cations (Na⁺)",syns:["oxygen","Na+","cation","negative end","δ- attracted"],weight:3},
-{term:"δ+ hydrogens attracted to anions (Cl⁻)",syns:["hydrogen","Cl-","anion","positive end","δ+ attracted"],weight:3},
+{term:"Water is polar (\u03B4+ and \u03B4\u2212)",syns:["polar","\u03B4+","\u03B4-","partial charge","dipole"],weight:2},
+{term:"\u03B4\u2212 oxygen attracted to cations (Na\u207A)",syns:["oxygen","Na+","cation","negative end","\u03B4- attracted"],weight:3},
+{term:"\u03B4+ hydrogens attracted to anions (Cl\u207B)",syns:["hydrogen","Cl-","anion","positive end","\u03B4+ attracted"],weight:3},
 {term:"Hydration shell forms",syns:["hydration shell","surround","solvat","cage","cluster"],weight:2},
 {term:"Hydrophilic / ionic = soluble",syns:["hydrophilic","water-loving","soluble","dissolve"],weight:2}
 ],
-model:"Water dissolves NaCl because water is polar. The δ− oxygen ends of water molecules are attracted to the positive Na⁺ ions, while the δ+ hydrogen ends are attracted to the negative Cl⁻ ions. Water molecules surround each ion individually, forming a hydration shell that stabilizes the separated ions in solution and prevents them from recombining into a crystal. Because NaCl is ionic (charged), it is hydrophilic and dissolves readily. This process is driven by the electrostatic attraction between water's partial charges and the full charges on the ions."
+model:"Water dissolves NaCl because water is polar. The \u03B4\u2212 oxygen ends of water molecules are attracted to the positive Na\u207A ions, while the \u03B4+ hydrogen ends are attracted to the negative Cl\u207B ions. Water molecules surround each ion individually, forming a hydration shell that stabilizes the separated ions in solution and prevents them from recombining into a crystal. Because NaCl is ionic (charged), it is hydrophilic and dissolves readily. This process is driven by the electrostatic attraction between water's partial charges and the full charges on the ions."
 },
 {q:"Why does ice float, and why is this property essential for life?",
 concepts:[
@@ -708,38 +741,38 @@ concepts:[
 {term:"Insulates water below",syns:["insulat","protect","below","under","surface"],weight:3},
 {term:"Aquatic life survives winter",syns:["aquatic","fish","organism","lake","surviv","winter","life"],weight:2}
 ],
-model:"When water freezes, hydrogen bonds lock each molecule into a fixed position, forming a crystalline lattice with a hexagonal open structure. This lattice has gaps that increase the volume compared to liquid water, making ice less dense (0.917 g/mL vs. 1.00 g/mL). Because ice is less dense, it floats. This is biologically essential: surface ice forms an insulating layer that prevents lakes and oceans from freezing solid from the bottom up. The liquid water beneath the ice remains at about 4°C, allowing aquatic organisms to survive through winter."
+model:"When water freezes, hydrogen bonds lock each molecule into a fixed position, forming a crystalline lattice with a hexagonal open structure. This lattice has gaps that increase the volume compared to liquid water, making ice less dense (0.917 g/mL vs. 1.00 g/mL). Because ice is less dense, it floats. This is biologically essential: surface ice forms an insulating layer that prevents lakes and oceans from freezing solid from the bottom up. The liquid water beneath the ice remains at about 4\u00B0C, allowing aquatic organisms to survive through winter."
 },
 {q:"Explain what a buffer is, how it works, and why the bicarbonate buffer system is critical for human blood.",
 concepts:[
 {term:"Buffer = weak acid + conjugate base",syns:["weak acid","conjugate base","pair","buffer system"],weight:2},
 {term:"Resists pH changes",syns:["resist","stabiliz","maintain","prevent change","minimize"],weight:2},
-{term:"Weak acid donates H⁺ to neutralize added base",syns:["donate","neutralize base","accept base","HA"],weight:2},
-{term:"Conjugate base accepts H⁺ to neutralize added acid",syns:["accept","absorb","neutralize acid","A-","conjugate"],weight:2},
-{term:"Bicarbonate system: CO₂ + H₂O <span aria-hidden="true">⇌</span> H₂CO₃ <span aria-hidden="true">⇌</span> H⁺ + HCO₃⁻",syns:["bicarbon","CO2","H2CO3","HCO3","carbonic"],weight:3},
+{term:"Weak acid donates H\u207A to neutralize added base",syns:["donate","neutralize base","accept base","HA"],weight:2},
+{term:"Conjugate base accepts H\u207A to neutralize added acid",syns:["accept","absorb","neutralize acid","A-","conjugate"],weight:2},
+{term:"Bicarbonate system: CO\u2082 + H\u2082O \u21CC H\u2082CO\u2083 \u21CC H\u207A + HCO\u2083\u207B",syns:["bicarbon","CO2","H2CO3","HCO3","carbonic"],weight:3},
 {term:"Blood pH maintained at 7.35-7.45",syns:["7.35","7.45","blood pH","narrow range"],weight:2}
 ],
-model:"A buffer is a solution containing a weak acid and its conjugate base that resists changes in pH. When acid is added, the conjugate base (A⁻) accepts the extra H⁺. When base is added, the weak acid (HA) donates H⁺ to replace what was neutralized. In human blood, the bicarbonate buffer system is critical: CO₂ + H₂O <span aria-hidden="true">⇌</span> H₂CO₃ <span aria-hidden="true">⇌</span> H⁺ + HCO₃⁻. If blood becomes too acidic, HCO₃⁻ absorbs excess H⁺. If blood becomes too basic, H₂CO₃ releases H⁺. The lungs help by adjusting CO₂ levels (breathe faster to lower CO₂ and raise pH, or slower to raise CO₂ and lower pH). This system maintains blood pH within the critical range of 7.35 to 7.45."
+model:"A buffer is a solution containing a weak acid and its conjugate base that resists changes in pH. When acid is added, the conjugate base (A\u207B) accepts the extra H\u207A. When base is added, the weak acid (HA) donates H\u207A to replace what was neutralized. In human blood, the bicarbonate buffer system is critical: CO\u2082 + H\u2082O \u21CC H\u2082CO\u2083 \u21CC H\u207A + HCO\u2083\u207B. If blood becomes too acidic, HCO\u2083\u207B absorbs excess H\u207A. If blood becomes too basic, H\u2082CO\u2083 releases H\u207A. The lungs help by adjusting CO\u2082 levels (breathe faster to lower CO\u2082 and raise pH, or slower to raise CO\u2082 and lower pH). This system maintains blood pH within the critical range of 7.35 to 7.45."
 },
 {q:"Compare and contrast covalent bonds and hydrogen bonds using water as your example. Address where each type occurs, their relative strengths, and their biological significance.",
 concepts:[
-{term:"Covalent = intramolecular, within H₂O",syns:["covalent","within","intra","O-H bond","inside the molecule","shared electron"],weight:3},
-{term:"Hydrogen bond = intermolecular, between H₂O molecules",syns:["hydrogen bond","between","inter","between molecules","among"],weight:3},
+{term:"Covalent = intramolecular, within H\u2082O",syns:["covalent","within","intra","O-H bond","inside the molecule","shared electron"],weight:3},
+{term:"Hydrogen bond = intermolecular, between H\u2082O molecules",syns:["hydrogen bond","between","inter","between molecules","among"],weight:3},
 {term:"Covalent is much stronger (~400 kJ vs ~20 kJ)",syns:["stronger","400","20","5%","weaker","strength difference"],weight:2},
 {term:"H-bonds are numerous and collectively powerful",syns:["collectively","numerous","many","cumulative","network","vast"],weight:2},
 {term:"Biological significance (properties of water, DNA, protein folding)",syns:["DNA","protein","fold","properties","boil","heat","life"],weight:2}
 ],
-model:"Covalent bonds are strong intramolecular bonds that hold atoms together within a molecule. In water, the two O-H covalent bonds hold each hydrogen to the oxygen through shared electrons, with a strength of roughly 400 kJ/mol. Hydrogen bonds are much weaker intermolecular attractions (about 20 kJ/mol each) that form between different water molecules, specifically between a δ+ hydrogen on one water molecule and the δ− oxygen on a neighboring molecule. Although individually weak, water forms vast networks of hydrogen bonds simultaneously, and their collective effect produces all of water's unusual properties: high boiling point, high specific heat, surface tension, and ice floating. The same distinction applies throughout biology: covalent bonds hold the backbone of DNA together, while hydrogen bonds hold the two strands together (A-T: 2, G-C: 3). Covalent bonds build the structure; hydrogen bonds fine-tune it."
+model:"Covalent bonds are strong intramolecular bonds that hold atoms together within a molecule. In water, the two O-H covalent bonds hold each hydrogen to the oxygen through shared electrons, with a strength of roughly 400 kJ/mol. Hydrogen bonds are much weaker intermolecular attractions (about 20 kJ/mol each) that form between different water molecules, specifically between a \u03B4+ hydrogen on one water molecule and the \u03B4\u2212 oxygen on a neighboring molecule. Although individually weak, water forms vast networks of hydrogen bonds simultaneously, and their collective effect produces all of water's unusual properties: high boiling point, high specific heat, surface tension, and ice floating. The same distinction applies throughout biology: covalent bonds hold the backbone of DNA together, while hydrogen bonds hold the two strands together (A-T: 2, G-C: 3). Covalent bonds build the structure; hydrogen bonds fine-tune it."
 },
-{q:"Explain the pH scale. What does it measure, why is it logarithmic, and what happens to [H⁺] and [OH⁻] as pH changes?",
+{q:"Explain the pH scale. What does it measure, why is it logarithmic, and what happens to [H\u207A] and [OH\u207B] as pH changes?",
 concepts:[
-{term:"pH = −log[H⁺]",syns:["negative log","−log","minus log","formula"],weight:2},
+{term:"pH = \u2212log[H\u207A]",syns:["negative log","\u2212log","minus log","formula"],weight:2},
 {term:"Logarithmic: each unit = 10-fold change",syns:["logarithm","10-fold","tenfold","10x","10 times","power of 10"],weight:3},
-{term:"Lower pH = more H⁺ = more acidic",syns:["lower pH","more acidic","more H+","higher concentration"],weight:2},
-{term:"Kw = [H⁺][OH⁻] = 10⁻¹⁴ always holds",syns:["Kw","10^-14","product","inverse","reciprocal"],weight:2},
-{term:"As [H⁺] goes up, [OH⁻] goes down",syns:["inverse","opposite","goes up.*goes down","goes down.*goes up","seesaw","reciprocal"],weight:2}
+{term:"Lower pH = more H\u207A = more acidic",syns:["lower pH","more acidic","more H+","higher concentration"],weight:2},
+{term:"Kw = [H\u207A][OH\u207B] = 10\u207B\u00B9\u2074 always holds",syns:["Kw","10^-14","product","inverse","reciprocal"],weight:2},
+{term:"As [H\u207A] goes up, [OH\u207B] goes down",syns:["inverse","opposite","goes up.*goes down","goes down.*goes up","seesaw","reciprocal"],weight:2}
 ],
-model:"The pH scale measures the hydrogen ion concentration of a solution using the formula pH = −log[H⁺]. It is logarithmic because [H⁺] can range over many orders of magnitude (from about 10⁰ to 10⁻¹⁴ M), and a log scale compresses this into a manageable 0-14 range. Each whole pH unit represents a 10-fold change in [H⁺]: a solution at pH 4 has 10 times more H⁺ than pH 5 and 100 times more than pH 6. Lower pH means more H⁺ (more acidic); higher pH means less H⁺ (more basic). The ion product of water, Kw = [H⁺][OH⁻] = 10⁻¹⁴, always holds at 25°C. This means [H⁺] and [OH⁻] are inversely related: as one goes up, the other must go down to keep the product constant."
+model:"The pH scale measures the hydrogen ion concentration of a solution using the formula pH = \u2212log[H\u207A]. It is logarithmic because [H\u207A] can range over many orders of magnitude (from about 10\u2070 to 10\u207B\u00B9\u2074 M), and a log scale compresses this into a manageable 0-14 range. Each whole pH unit represents a 10-fold change in [H\u207A]: a solution at pH 4 has 10 times more H\u207A than pH 5 and 100 times more than pH 6. Lower pH means more H\u207A (more acidic); higher pH means less H\u207A (more basic). The ion product of water, Kw = [H\u207A][OH\u207B] = 10\u207B\u00B9\u2074, always holds at 25\u00B0C. This means [H\u207A] and [OH\u207B] are inversely related: as one goes up, the other must go down to keep the product constant."
 },
 {q:"Explain dehydration synthesis and hydrolysis. How is water involved in building and breaking biological polymers?",
 concepts:[
@@ -749,41 +782,54 @@ concepts:[
 {term:"Examples (protein/peptide, carbohydrate, nucleic acid)",syns:["protein","peptide","carbohydrate","sugar","nucleic","DNA","RNA","polymer"],weight:2},
 {term:"Water is a reactant or product",syns:["reactant","product","consumed","released","participant"],weight:2}
 ],
-model:"Dehydration synthesis (condensation) and hydrolysis are reverse reactions that involve water in building and breaking biological polymers. In dehydration synthesis, two monomers are joined together and a water molecule is released as a byproduct. For example, two amino acids are linked by a peptide bond with the release of one H₂O. In hydrolysis, water is consumed as a reactant to break a bond between monomers. A water molecule is split, with the H going to one monomer and the OH to the other, separating them. These reactions apply to all four classes of biological macromolecules: proteins (peptide bonds), carbohydrates (glycosidic bonds), nucleic acids (phosphodiester bonds), and lipids (ester bonds). Digestion is largely hydrolysis; biosynthesis is largely dehydration synthesis."
+model:"Dehydration synthesis (condensation) and hydrolysis are reverse reactions that involve water in building and breaking biological polymers. In dehydration synthesis, two monomers are joined together and a water molecule is released as a byproduct. For example, two amino acids are linked by a peptide bond with the release of one H\u2082O. In hydrolysis, water is consumed as a reactant to break a bond between monomers. A water molecule is split, with the H going to one monomer and the OH to the other, separating them. These reactions apply to all four classes of biological macromolecules: proteins (peptide bonds), carbohydrates (glycosidic bonds), nucleic acids (phosphodiester bonds), and lipids (ester bonds). Digestion is largely hydrolysis; biosynthesis is largely dehydration synthesis."
 }
 ];
 
 // ============================================================
 // QUIZ ENGINE
 // ============================================================
-let answered=0,correct=0;
-const catSet=new Set();quizData.forEach(q=>catSet.add(q.cat));
-const catSel=document.getElementById('cat-filter');
-[...catSet].sort().forEach(c=>{const o=document.createElement('option');o.value=c;o.textContent=c;catSel.appendChild(o);});
+var answered=0,correct=0;
+var catSet=new Set();quizData.forEach(function(q){catSet.add(q.cat);});
+var catSel=document.getElementById('cat-filter');
+Array.from(catSet).sort().forEach(function(c){var o=document.createElement('option');o.value=c;o.textContent=c;catSel.appendChild(o);});
+
+function getFiltered(){
+  var df=document.getElementById('diff-filter').value;
+  var cf=document.getElementById('cat-filter').value;
+  return quizData.filter(function(q){return(df==='all'||q.diff===df)&&(cf==='all'||q.cat===cf);});
+}
+
 function renderQuiz(){
-  const df=document.getElementById('diff-filter').value;const cf=document.getElementById('cat-filter').value;
-  const area=document.getElementById('quiz-area');area.innerHTML='';answered=0;correct=0;updateScore();
-  const filtered=quizData.filter(q=>(df==='all'||q.diff===df)&&(cf==='all'||q.cat===cf));
-  filtered.forEach((q,idx)=>{
-    const div=document.createElement('div');div.className='q-card';div.id='q-'+idx;
-    let optsHtml='';q.opts.forEach((o,oi)=>{optsHtml+=`<label><input type="radio" name="q${idx}" value="${oi}"> ${o}</label>`;});
-    div.innerHTML=`<div class="q-diff ${q.diff}">${q.diff.toUpperCase()}</div><div class="q-text">${idx+1}. ${q.q}</div><div class="q-opts">${optsHtml}</div><button class="q-submit" onclick="checkQ(${idx},${q.ans})">Check Answer</button><div class="q-feedback" id="fb-${idx}"></div>`;
+  var area=document.getElementById('quiz-area');area.innerHTML='';answered=0;correct=0;updateScore();
+  var filtered=getFiltered();
+  filtered.forEach(function(q,idx){
+    var div=document.createElement('div');div.className='q-card';div.id='q-'+idx;
+    div.setAttribute('role','listitem');
+    var optsHtml='<fieldset><legend class="sr-only">Answer options for question '+(idx+1)+'</legend>';
+    q.opts.forEach(function(o,oi){
+      optsHtml+='<label><input type="radio" name="q'+idx+'" value="'+oi+'"> '+o+'</label>';
+    });
+    optsHtml+='</fieldset>';
+    div.innerHTML='<div class="q-diff '+q.diff+'">'+q.diff.toUpperCase()+'</div><div class="q-text">'+(idx+1)+'. '+q.q+'</div><div class="q-opts">'+optsHtml+'</div><button class="q-submit" onclick="checkQ('+idx+','+q.ans+')">Check Answer</button><div class="q-feedback" id="fb-'+idx+'" role="alert"></div>';
     area.appendChild(div);
   });
 }
 function checkQ(idx,ans){
-  const sel=document.querySelector(`input[name="q${idx}"]:checked`);if(!sel)return;
-  const fb=document.getElementById('fb-'+idx);const val=parseInt(sel.value);
-  const filtered=quizData.filter(q=>{const df=document.getElementById('diff-filter').value;const cf=document.getElementById('cat-filter').value;return(df==='all'||q.diff===df)&&(cf==='all'||q.cat===cf);});
-  const qObj=filtered[idx];answered++;
+  var sel=document.querySelector('input[name="q'+idx+'"]:checked');if(!sel)return;
+  var fb=document.getElementById('fb-'+idx);var val=parseInt(sel.value);
+  var filtered=getFiltered();
+  var qObj=filtered[idx];answered++;
   if(val===ans){correct++;fb.className='q-feedback correct';fb.innerHTML='<strong>Correct!</strong> '+qObj.exp;}
   else{fb.className='q-feedback wrong';fb.innerHTML='<strong>Incorrect.</strong> '+qObj.exp;}
-  fb.style.display='block';document.querySelector(`#q-${idx} .q-submit`).disabled=true;updateScore();
+  fb.style.display='block';document.querySelector('#q-'+idx+' .q-submit').disabled=true;updateScore();
 }
 function updateScore(){
-  document.getElementById('score-text').textContent=`${correct} / ${answered}`;
-  const pct=answered?Math.round((correct/answered)*100):0;
+  document.getElementById('score-text').textContent=correct+' / '+answered;
+  var pct=answered?Math.round((correct/answered)*100):0;
   document.getElementById('score-fill').style.width=pct+'%';
+  var bar=document.querySelector('.score-fill-wrap');
+  if(bar){bar.setAttribute('aria-valuenow',pct);}
 }
 function filterQuiz(){renderQuiz();}
 function resetQuiz(){renderQuiz();}
@@ -791,22 +837,23 @@ function resetQuiz(){renderQuiz();}
 // ============================================================
 // FLASHCARD ENGINE
 // ============================================================
-let fcFiltered=[...fcData],fcIdx=0;
-const fcCats=[...new Set(fcData.map(c=>c.cat))].sort();
-const fcFiltersDiv=document.getElementById('fc-filters');
-const allBtn=document.createElement('button');allBtn.className='fc-filter active';allBtn.textContent='All';allBtn.onclick=()=>filterFC('all');fcFiltersDiv.appendChild(allBtn);
-fcCats.forEach(c=>{const b=document.createElement('button');b.className='fc-filter';b.textContent=c;b.onclick=()=>filterFC(c);fcFiltersDiv.appendChild(b);});
+var fcFiltered=fcData.slice(),fcIdx=0;
+var fcCats=Array.from(new Set(fcData.map(function(c){return c.cat;}))).sort();
+var fcFiltersDiv=document.getElementById('fc-filters');
+var allBtn=document.createElement('button');allBtn.className='fc-filter active';allBtn.textContent='All';allBtn.onclick=function(){filterFC('all');};fcFiltersDiv.appendChild(allBtn);
+fcCats.forEach(function(c){var b=document.createElement('button');b.className='fc-filter';b.textContent=c;b.onclick=function(){filterFC(c);};fcFiltersDiv.appendChild(b);});
+
 function filterFC(cat){
-  document.querySelectorAll('.fc-filter').forEach(b=>b.classList.remove('active'));
-  if(cat==='all'){fcFiltered=[...fcData];document.querySelector('.fc-filter').classList.add('active');}
-  else{fcFiltered=fcData.filter(c=>c.cat===cat);[...document.querySelectorAll('.fc-filter')].find(b=>b.textContent===cat).classList.add('active');}
+  document.querySelectorAll('.fc-filter').forEach(function(b){b.classList.remove('active');});
+  if(cat==='all'){fcFiltered=fcData.slice();document.querySelector('.fc-filter').classList.add('active');}
+  else{fcFiltered=fcData.filter(function(c){return c.cat===cat;});Array.from(document.querySelectorAll('.fc-filter')).find(function(b){return b.textContent===cat;}).classList.add('active');}
   fcIdx=0;showCard();
 }
 function showCard(){
-  if(!fcFiltered.length)return;const c=fcFiltered[fcIdx];
+  if(!fcFiltered.length)return;var c=fcFiltered[fcIdx];
   document.getElementById('fc-cat').textContent=c.cat;document.getElementById('fc-q').innerHTML=c.f;
   document.getElementById('fc-a').innerHTML=c.b;document.getElementById('fc-inner').classList.remove('flipped');
-  document.getElementById('fc-counter').textContent=`Card ${fcIdx+1} of ${fcFiltered.length}`;
+  document.getElementById('fc-counter').textContent='Card '+(fcIdx+1)+' of '+fcFiltered.length;
 }
 function flipCard(){document.getElementById('fc-inner').classList.toggle('flipped');}
 function nextCard(){fcIdx=(fcIdx+1)%fcFiltered.length;showCard();}
@@ -816,35 +863,36 @@ function prevCard(){fcIdx=(fcIdx-1+fcFiltered.length)%fcFiltered.length;showCard
 // SHORT ANSWER ENGINE
 // ============================================================
 function renderSA(){
-  const area=document.getElementById('sa-area');area.innerHTML='';
-  saData.forEach((sa,idx)=>{
-    const div=document.createElement('div');div.className='sa-card';
-    div.innerHTML=`<div class="sa-q">${idx+1}. ${sa.q}</div><textarea class="sa-textarea" id="sa-input-${idx}" placeholder="Type your answer here..."></textarea><button class="sa-submit" onclick="gradeSA(${idx})">Grade Answer</button><div class="sa-result" id="sa-result-${idx}"></div>`;
+  var area=document.getElementById('sa-area');area.innerHTML='';
+  saData.forEach(function(sa,idx){
+    var div=document.createElement('div');div.className='sa-card';
+    div.innerHTML='<div class="sa-q">'+(idx+1)+'. '+sa.q+'</div><label for="sa-input-'+idx+'" class="sr-only">Your answer for question '+(idx+1)+'</label><textarea class="sa-textarea" id="sa-input-'+idx+'" placeholder="Type your answer here..."></textarea><button class="sa-submit" onclick="gradeSA('+idx+')">Grade Answer</button><div class="sa-result" id="sa-result-'+idx+'" role="status"></div>';
     area.appendChild(div);
   });
 }
 function gradeSA(idx){
-  const input=document.getElementById('sa-input-'+idx).value.toLowerCase();const sa=saData[idx];if(!input.trim())return;
-  let totalWeight=0,earnedWeight=0;const tags=[];
-  sa.concepts.forEach(c=>{
+  var input=document.getElementById('sa-input-'+idx).value.toLowerCase();var sa=saData[idx];if(!input.trim())return;
+  var totalWeight=0,earnedWeight=0;var tags=[];
+  sa.concepts.forEach(function(c){
     totalWeight+=c.weight;
-    const hit=c.syns.some(s=>input.includes(s.toLowerCase()));
-    if(hit){earnedWeight+=c.weight;tags.push(`<span class="sa-tag hit">${c.term}</span>`);}
-    else{tags.push(`<span class="sa-tag miss">${c.term}</span>`);}
+    var hit=c.syns.some(function(s){return input.includes(s.toLowerCase());});
+    if(hit){earnedWeight+=c.weight;tags.push('<span class="sa-tag hit">'+c.term+'</span>');}
+    else{tags.push('<span class="sa-tag miss">'+c.term+'</span>');}
   });
-  const words=input.split(/\s+/).length;const bonus=Math.min(words/50*0.05,0.1);
-  let pct=Math.min(Math.round(((earnedWeight/totalWeight)+bonus)*100),100);
-  const color=pct>=80?'var(--green)':pct>=50?'var(--amber)':'var(--red)';
-  const res=document.getElementById('sa-result-'+idx);
-  res.innerHTML=`<div class="sa-pct" style="color:${color}">${pct}%</div><div class="sa-score-bar"><div class="sa-score-fill" style="width:${pct}%;background:${color};"></div></div><div class="sa-tags">${tags.join('')}</div><details class="sa-model"><summary>Show Model Answer</summary><div class="model-text">${sa.model}</div></details>`;
+  var words=input.split(/\s+/).length;var bonus=Math.min(words/50*0.05,0.1);
+  var pct=Math.min(Math.round(((earnedWeight/totalWeight)+bonus)*100),100);
+  var color=pct>=80?'var(--green)':pct>=50?'var(--amber)':'var(--red)';
+  var res=document.getElementById('sa-result-'+idx);
+  res.innerHTML='<div class="sa-pct" style="color:'+color+'">'+pct+'%</div><div class="sa-score-bar"><div class="sa-score-fill" style="width:'+pct+'%;background:'+color+';"></div></div><div class="sa-tags">'+tags.join('')+'</div><details class="sa-model"><summary>Show Model Answer</summary><div class="model-text">'+sa.model+'</div></details>';
   res.style.display='block';
+  announce('Score: '+pct+' percent');
 }
 
 renderQuiz();showCard();renderSA();
 </script>
 
-  <div style="max-width: 800px; margin: 40px auto; padding: 20px 30px; background: #fff8e1; border-left: 4px solid #f9a825; border-radius: 8px; font-size: 14px; line-height: 1.6; color: #555;">
-  <div style="font-weight: bold; font-size: 15px; margin-bottom: 10px;"><span aria-hidden="true">⚠️</span> Important Notice</div>
+<div style="max-width: 800px; margin: 40px auto; padding: 20px 30px; background: #fff8e1; border-left: 4px solid #f9a825; border-radius: 8px; font-size: 14px; line-height: 1.6; color: #555;">
+  <div style="font-weight: bold; font-size: 15px; margin-bottom: 10px;">Important Notice</div>
   <p style="margin: 0 0 10px 0;">These study resources are provided free of charge for educational purposes only. They are intended as supplemental study aids and should not be used as a substitute for your course textbooks, lecture materials, or the guidance of your instructors.</p>
   <p style="margin: 0 0 10px 0;">While every effort has been made to ensure accuracy, this content may contain errors, omissions, or information that is out of date. Science is constantly evolving, and material that was accurate at the time of writing may no longer reflect current understanding. Always verify important facts, formulas, and concepts against your official course materials.</p>
   <p style="margin: 0 0 10px 0;">No guarantees are made regarding the completeness, accuracy, or reliability of any information presented on these sites. Use at your own discretion. If you spot an error, we appreciate you letting us know so it can be corrected.</p>
